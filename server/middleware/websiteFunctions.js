@@ -18,7 +18,7 @@ export const getPageContents = (lang, slug, rootDir) => {
 
 export const getViewName = (req, reply, done) => {
     let { lang, slug = 'inicio' } = req.params;
-    if(req.params.category) {
+    if (req.params.category) {
         slug = `${req.params.category}.${slug}`;
     }
     if (routesMap[lang] && routesMap[lang][slug]) {

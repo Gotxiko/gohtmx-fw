@@ -7,7 +7,7 @@
  * These routes should all return JSON data for whatever needs it.
  *
  */
- 
+
 // import { fn } from '../middleware/apiFunctions.js';
 
 export const APIRoutes = (fastify, opts, done) => {

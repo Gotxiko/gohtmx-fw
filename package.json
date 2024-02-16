@@ -6,8 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --write .",
-        "build": "parcel build src/**/*.js src/**/*.scss --dist-dir dist --no-scope-hoist",
-        "watch": "parcel watch src/**/*.js src/**/*.scss --dist-dir dist --no-scope-hoist",
+        "build": "parcel build src/**/*.js src/**/*.scss --dist-dir dist",
+        "watch": "parcel watch src/**/*.js src/**/*.scss --dist-dir dist",
         "prod-start": "pm2 start app.js --name 'www' --env production",
         "dev-start": "pm2 start app.js --name 'www' --env development",
         "delete-all": "pm2 delete all",
