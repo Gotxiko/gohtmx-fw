@@ -24,7 +24,7 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         preValidation: validateLanguage,
         preHandler: getViewName,
         handler: (req, reply) => {
-          const { lang, slug } = req.params;
+          const { lang, slug = 'index' } = req.params;
           const { pageStrings } = getPageContents(lang, slug, rootDir);
           reply.view(`/pages/${slug}/index`, {
               strings: pageStrings,
@@ -40,7 +40,7 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         preValidation: validateLanguage,
         preHandler: getViewName,
         handler: (req, reply) => {
-          const { lang, category, slug = 'index' } = req.params;
+          const { lang, category, slug } = req.params;
           const { pageStrings } = getPageContents(lang, slug, rootDir);
           reply.view(`/pages/${slug}/index`, {
               strings: pageStrings,
