@@ -1,0 +1,14 @@
+{
+    "en": {
+        "home": "index",
+        "about": "about",
+        "contact": "contact",
+        "blog": "blog"
+    },
+    "es": {
+        "inicio": "index",
+        "nosotros": "about",
+        "contacto": "contact",
+        "blog": "blog"
+    }
+}
