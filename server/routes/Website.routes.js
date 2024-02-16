@@ -9,7 +9,7 @@
  */
 
 import { validateLanguage } from '../middleware/validateLanguage.js';
-import { getPageContents } from '../middleware/pageFunctions.js';
+import { getViewName, getPageContents } from '../middleware/pageFunctions.js';
 
 export const WebsiteRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
@@ -20,33 +20,44 @@ export const WebsiteRoutes = (fastify, opts, done) => {
 
     fastify.route({
         method: 'GET',
-        url: '/:lang',
+        url: '/:lang/:slug?',
         preValidation: validateLanguage,
+        preHandler: getViewName,
         handler: (req, reply) => {
-            const { lang } = req.params;
-            const slug = lang == 'es' ? 'inicio' : 'index';
-            const { pageStrings } = getPageContents(lang, slug, rootDir);
-            reply.view(`/pages/${pageStrings.template}`, {
-                strings: pageStrings,
-                lang: lang,
-            });
+          const { lang, slug = 'index' } = req.params;
+          if(slug == '404') {
+            reply.sendFile('404.html', { root: rootDir + '/public' });
+            return;
+          }
+          const { pageStrings } = getPageContents(lang, slug, rootDir);
+          reply.view(`/pages/${slug}/index`, {
+              strings: pageStrings,
+              slug: slug,
+              lang: lang,
+          });
         },
     });
 
     fastify.route({
         method: 'GET',
-        url: '/:lang/:slug',
+        url: '/:lang/:category/:slug',
         preValidation: validateLanguage,
+        preHandler: getViewName,
         handler: (req, reply) => {
-            const { lang, slug } = req.params;
-            const { pageStrings } = getPageContents(lang, slug, rootDir);
-            reply.view(`/pages/${pageStrings.template}`, {
-                strings: pageStrings,
-                lang: lang,
-            });
+          const { lang, category, slug } = req.params;
+          if(slug == '404') {
+            reply.sendFile('404.html', { root: rootDir + '/public' });
+            return;
+          }
+          const { pageStrings } = getPageContents(lang, slug, rootDir);
+          reply.view(`/pages/${slug}/index`, {
+              strings: pageStrings,
+              slug: slug,
+              lang: lang,
+          });
         },
     });
-
+    
     fastify.route({
         method: 'GET',
         url: '/favicon.ico',

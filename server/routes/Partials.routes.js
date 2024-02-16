@@ -1,0 +1,29 @@
+/*
+ * Components routes for HTMX requests handling and response
+ * @param {Object} fastify - Fastify instance
+ * @param {Object} opts - Options
+ * @param {Function} done - Callback function
+ *
+ * These routes should all view .hbs files from the partials folder inside the respective page folder.
+ *
+ */
+
+import { getPartialStrings } from '../middleware/partialsFunctions.js';
+
+export const PartialsRoutes = (fastify, opts, done) => {
+    const rootDir = opts['rootDir'];
+
+    fastify.route({
+        method: 'GET',
+        url: '/:lang/:slug/partials/:name',
+        handler: (req, reply) => {
+            const { lang, slug, name } = req.params;
+            const partialStrings = getPartialStrings(lang, slug, name, rootDir);
+            reply.view(`/pages/${slug}/partials/${name}/partial`, {
+                strings: partialStrings,
+            });
+        },
+    });
+
+    done();
+};

@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 import { WebsiteRoutes } from './server/routes/Website.routes.js';
-import { ComponentsRoutes } from './server/routes/Components.routes.js';
+import { PartialsRoutes } from './server/routes/Partials.routes.js';
 
 dotenv.config();
 
@@ -32,7 +32,7 @@ fastify.register(staticPlugin, {
 });
 
 fastify.register(WebsiteRoutes, { rootDir: __dirname });
-fastify.register(ComponentsRoutes, { rootDir: __dirname });
+fastify.register(PartialsRoutes, { rootDir: __dirname });
 
 fastify
     .listen({ port: port })
