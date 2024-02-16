@@ -1,7 +1,5 @@
 {
     "es": {
-        "inicio": "index",
-        "nosotros": "about",
-        "nosotros.historia": "about.history"
+        "inicio": "index"
     }
 }
