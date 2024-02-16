@@ -1,16 +1,7 @@
 {
-    "en": {
-        "home": "index",
-        "about": "about",
-        "about.history": "about.history",
-        "contact": "contact",
-        "blog": "blog"
-    },
     "es": {
         "inicio": "index",
         "nosotros": "about",
-        "nosotros.historia": "about.history",
-        "contacto": "contact",
-        "blog": "blog"
+        "nosotros.historia": "about.history"
     }
 }

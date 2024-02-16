@@ -25,6 +25,10 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         preHandler: getViewName,
         handler: (req, reply) => {
           const { lang, slug = 'index' } = req.params;
+          if(slug == '404') {
+            reply.sendFile('404.html', { root: rootDir + '/public' });
+            return;
+          }
           const { pageStrings } = getPageContents(lang, slug, rootDir);
           reply.view(`/pages/${slug}/index`, {
               strings: pageStrings,
@@ -41,6 +45,10 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         preHandler: getViewName,
         handler: (req, reply) => {
           const { lang, category, slug } = req.params;
+          if(slug == '404') {
+            reply.sendFile('404.html', { root: rootDir + '/public' });
+            return;
+          }
           const { pageStrings } = getPageContents(lang, slug, rootDir);
           reply.view(`/pages/${slug}/index`, {
               strings: pageStrings,

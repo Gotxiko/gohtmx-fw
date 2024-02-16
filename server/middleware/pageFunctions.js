@@ -23,6 +23,8 @@ export const getViewName = (req, reply, done) => {
     }
     if (routesMap[lang] && routesMap[lang][req.params.slug]) {
         req.params.slug = routesMap[lang][req.params.slug];
+    } else {
+        req.params.slug = '404';
     }
     done();
 };
