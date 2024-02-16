@@ -8,8 +8,8 @@
  *
  */
 
-import { validateLanguage } from '../middleware/validateLanguage.js';
-import { getViewName, getPageContents } from '../middleware/pageFunctions.js';
+import { validateLanguage } from '../utils/validateLanguage.js';
+import { getViewName, getPageContents } from '../middleware/websiteFunctions.js';
 
 export const WebsiteRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
@@ -24,8 +24,8 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         preValidation: validateLanguage,
         preHandler: getViewName,
         handler: (req, reply) => {
-          const { lang, slug = 'index' } = req.params;
-          if(slug == '404') {
+          const { lang, slug } = req.params;
+          if(req.params.slug == '404') {
             reply.sendFile('404.html', { root: rootDir + '/public' });
             return;
           }

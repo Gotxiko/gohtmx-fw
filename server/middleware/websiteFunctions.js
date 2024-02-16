@@ -17,12 +17,12 @@ export const getPageContents = (lang, slug, rootDir) => {
 };
 
 export const getViewName = (req, reply, done) => {
-    const { lang, slug = 'inicio' } = req.params;
+    let { lang, slug = 'inicio' } = req.params;
     if(req.params.category) {
-        req.params.slug = `${req.params.category}.${slug}`;
+        slug = `${req.params.category}.${slug}`;
     }
-    if (routesMap[lang] && routesMap[lang][req.params.slug]) {
-        req.params.slug = routesMap[lang][req.params.slug];
+    if (routesMap[lang] && routesMap[lang][slug]) {
+        req.params.slug = routesMap[lang][slug];
     } else {
         req.params.slug = '404';
     }
