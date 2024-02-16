@@ -36,6 +36,22 @@ export const WebsiteRoutes = (fastify, opts, done) => {
 
     fastify.route({
         method: 'GET',
+        url: '/:lang/:category/:slug',
+        preValidation: validateLanguage,
+        preHandler: getViewName,
+        handler: (req, reply) => {
+          const { lang, category, slug = 'index' } = req.params;
+          const { pageStrings } = getPageContents(lang, slug, rootDir);
+          reply.view(`/pages/${slug}/index`, {
+              strings: pageStrings,
+              slug: slug,
+              lang: lang,
+          });
+        },
+    });
+    
+    fastify.route({
+        method: 'GET',
         url: '/favicon.ico',
         handler: (req, reply) => {
             reply.sendFile('favicon.ico', { root: rootDir + '/public' });
