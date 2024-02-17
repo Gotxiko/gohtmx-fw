@@ -34,6 +34,7 @@ export const WebsiteRoutes = (fastify, opts, done) => {
             }
             const { pageStrings } = getPageContents(lang, slug, rootDir);
             reply.view(`/pages/${slug}/index`, {
+                rootDir: rootDir,
                 strings: pageStrings,
                 slug: slug,
                 lang: lang,
@@ -54,6 +55,7 @@ export const WebsiteRoutes = (fastify, opts, done) => {
             }
             const { pageStrings } = getPageContents(lang, slug, rootDir);
             reply.view(`/pages/${slug}/index`, {
+                rootDir: rootDir,
                 strings: pageStrings,
                 slug: slug,
                 lang: lang,

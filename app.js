@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import path from 'path';
-import handlebars from 'handlebars';
+import ejs from 'ejs';
+import fs from 'fs/promises';
 
 import Fastify from 'fastify';
 import view from '@fastify/view';
@@ -11,7 +12,7 @@ import { dirname } from 'path';
 
 import { WebsiteRoutes } from './server/routes/Website.routes.js';
 import { PartialsRoutes } from './server/routes/Partials.routes.js';
-// import { ApiRoutes } from './server/routes/Api.routes.js';
+import { APIRoutes } from './server/routes/Api.routes.js';
 
 dotenv.config();
 
@@ -23,7 +24,7 @@ const fastify = Fastify({ logger: true, ignoreTrailingSlash: true });
 const port = process.env.PORT || 3000;
 
 fastify.register(view, {
-    engine: { handlebars },
+    engine: { ejs },
     root: __viewsDir,
 });
 
@@ -34,6 +35,7 @@ fastify.register(staticPlugin, {
 
 fastify.register(WebsiteRoutes, { rootDir: __dirname });
 fastify.register(PartialsRoutes, { rootDir: __dirname });
+fastify.register(APIRoutes, { rootDir: __dirname });
 
 fastify
     .listen({ port: port })
