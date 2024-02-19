@@ -22,10 +22,13 @@ export const WebsiteRoutes = (fastify, opts, done) => {
         url: '/:lang/:slug?',
         preValidation: validateLanguage,
         handler: (req, reply) => {
-            const { lang, slug = 'index' } = req.params;
-            if (req.params.slug == '404') {
+            let { lang, slug } = req.params;
+            if (slug == '404') {
                 reply.sendFile('404.html', { root: rootDir + '/public' });
                 return;
+            }
+            if (!slug) {
+                slug = lang === 'es' ? 'inicio' : 'home';
             }
             reply.sendFile(`${lang}/${slug}.html`, {
                 root: rootDir + '/dist/',
