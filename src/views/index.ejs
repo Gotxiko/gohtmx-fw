@@ -8,10 +8,9 @@
     </head>
 
     <body class="w-full">
-        <%- include('../../partials/header') %>
-        <main class="p-4">
-            <h1 class="w-full text-3xl font-bold"><%=strings.title%></h1>
-            <%- include('partials/cardList') %>
-        </main>
+        <main
+            class="flex h-auto w-full flex-col items-center justify-center p-4"
+        ></main>
+        <button hx-get="/es/partials/partial" hx-swap="outerHTML">HTMX</button>
     </body>
 </html>

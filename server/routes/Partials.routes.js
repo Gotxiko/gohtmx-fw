@@ -15,11 +15,11 @@ export const PartialsRoutes = (fastify, opts, done) => {
 
     fastify.route({
         method: 'GET',
-        url: '/:lang/:slug/partials/:name',
+        url: '/:lang/partials/:name',
         handler: (req, reply) => {
-            const { lang, slug, name } = req.params;
-            const partialStrings = getPartialStrings(lang, slug, name, rootDir);
-            reply.view(`/pages/${slug}/partials/${name}/partial`, {
+            const { lang, name } = req.params;
+            const partialStrings = getPartialStrings(lang, name, rootDir);
+            reply.view(`/server/views/partials/${name}/partial`, {
                 strings: partialStrings,
             });
         },

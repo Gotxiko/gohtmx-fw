@@ -16,7 +16,7 @@ npm install
 npm run build
 ```
 
-This command runs the compiles the .scss and .js inside src/assets into the dist directory.
+This command runs the compiles the .ejs, .scss and .js inside src into the dist directory. It will create a folder per language configured in build.js containing the .html files.
 
 ## Starting the Server with PM2
 

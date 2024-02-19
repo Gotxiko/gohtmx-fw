@@ -1,5 +1,8 @@
 {
     "es": {
-        "inicio": "index"
+        "index": "inicio"
+    },
+    "en": {
+        "index": "home"
     }
 }
