@@ -15,7 +15,7 @@ const views = fs
     .filter((file) => file.endsWith('.ejs'));
 
 const routesMap = JSON.parse(
-    fs.readFileSync('./server/data/routesMap.json', 'utf-8'),
+    fs.readFileSync('./src/config/routesMap.json', 'utf-8'),
 );
 
 for (const locale of locales) {
