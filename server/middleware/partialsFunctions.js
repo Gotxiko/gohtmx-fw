@@ -6,7 +6,7 @@ export const getPartialStrings = (lang, name, rootDir) => {
         fs.readFileSync(
             path.join(
                 rootDir,
-                `./server/views/partials/${name}/strings.${lang}.json`,
+                `./server/views/partials/${name}/langs.${lang}.json`,
             ),
             'utf8',
         ),
