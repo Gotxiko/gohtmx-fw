@@ -19,12 +19,17 @@ const routesMap = JSON.parse(
 );
 
 for (const locale of locales) {
-    const data = JSON.parse(
+    const strings = JSON.parse(
         fs.readFileSync(`./src/locales/${locale}.json`, 'utf-8'),
     );
     for (const view of views) {
         try {
-            const str = await ejs.renderFile(`./src/views/${view}`, data, {});
+            const viewName = view.replace('.ejs', '');
+            const str = await ejs.renderFile(
+                `./src/views/${view}`,
+                { ...strings[viewName], locale },
+                {},
+            );
             const result = await posthtml().use(htmlnano()).process(str);
             const outputDir = `./dist/${locale}`;
             fs.mkdirSync(outputDir, { recursive: true });

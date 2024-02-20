@@ -2,7 +2,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Website</title>
+        <title><%= title %></title>
         <link rel="stylesheet" href="/assets/scss/app.css" />
         <script type="module" src="/assets/js/app.js"></script>
     </head>
@@ -10,7 +10,16 @@
     <body class="w-full">
         <main
             class="flex h-auto w-full flex-col items-center justify-center p-4"
-        ></main>
-        <button hx-get="/es/partials/partial" hx-swap="outerHTML">HTMX</button>
+        >
+            <button
+                hx-get="/<%= locale %>/partials/partial"
+                hx-swap="innerHTML"
+                hx-target="#swap"
+                class="rounded-full bg-blue-500 px-6 py-2 font-bold text-white"
+            >
+                HTMX
+            </button>
+            <div id="swap"></div>
+        </main>
     </body>
 </html>

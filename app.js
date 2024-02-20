@@ -17,7 +17,6 @@ dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const __viewsDir = path.resolve(__dirname, './views');
 
 const fastify = Fastify({ logger: true, ignoreTrailingSlash: true });
 const port = process.env.PORT || 3000;
