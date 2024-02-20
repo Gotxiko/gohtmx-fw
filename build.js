@@ -34,7 +34,6 @@ for (const locale of locales) {
             const outputDir = `./dist/${locale}`;
             fs.mkdirSync(outputDir, { recursive: true });
 
-            // Get the filename from the routes map
             const filename = routesMap[locale][view.replace('.ejs', '')];
 
             fs.writeFileSync(

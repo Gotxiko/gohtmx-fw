@@ -1,5 +1,9 @@
 {
     "index": {
-        "title": "The Big Show"
+        "title": "Home"
+    },
+    "about": {
+        "title": "About The Big Show",
+        "description": "The Big Show is a weekly radio show that airs on 88.5 FM in the greater Los Angeles area. The show is hosted by John Doe and Jane Doe and features a variety of guests and topics."
     }
 }

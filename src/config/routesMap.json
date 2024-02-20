@@ -1,8 +1,10 @@
 {
     "es": {
-        "index": "inicio"
+        "index": "inicio",
+        "about": "nosotros"
     },
     "en": {
-        "index": "home"
+        "index": "home",
+        "about": "about"
     }
 }

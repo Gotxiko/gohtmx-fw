@@ -1,5 +1,9 @@
 {
     "index": {
-        "title": "The Big Show"
-    }
+        "title": "Inicio"
+    },
+   "about": {
+        "title": "About Us",
+        "content": "We are a small company that makes big things."
+   }
 }
