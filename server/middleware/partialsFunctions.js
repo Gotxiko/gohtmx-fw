@@ -1,12 +1,12 @@
 import path from 'path';
 import fs from 'fs';
 
-export const getPartialStrings = (lang, slug, name, rootDir) => {
+export const getPartialStrings = (lang, name, rootDir) => {
     const partialStrings = JSON.parse(
         fs.readFileSync(
             path.join(
                 rootDir,
-                `./views/pages/${slug}/partials/${name}/strings.${lang}.json`,
+                `./server/views/partials/${name}/langs.${lang}.json`,
             ),
             'utf8',
         ),

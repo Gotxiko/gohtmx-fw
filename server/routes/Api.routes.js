@@ -8,6 +8,8 @@
  *
  */
 
+// import { fn } from '../middleware/apiFunctions.js';
+
 export const APIRoutes = (fastify, opts, done) => {
     const dir = opts['dir'];
 
