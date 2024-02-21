@@ -11,15 +11,7 @@
         <main
             class="flex h-auto w-full flex-col items-center justify-center p-4"
         >
-            <button
-                hx-get="/<%= locale %>/partials/partial"
-                hx-swap="innerHTML"
-                hx-target="#swap"
-                class="rounded-full bg-blue-500 px-6 py-2 font-bold text-white"
-            >
-                HTMX
-            </button>
-            <div id="swap"></div>
+            <%- include('../partials/Navigation.ejs') %>
         </main>
     </body>
 </html>

@@ -6,6 +6,8 @@ This project uses Gulp to automate the build process. The source files are locat
 
 First, install the project dependencies:
 
+Use node #v20.11.1# to avoid any issues with the dependencies.
+
 ```bash
 npm install
 ```
