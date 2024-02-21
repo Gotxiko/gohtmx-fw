@@ -1,5 +1,5 @@
 import ejs from 'ejs';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -9,39 +9,46 @@ import htmlnano from 'htmlnano';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const locales = ['es', 'en'];
-const views = fs
-    .readdirSync('./src/views')
-    .filter((file) => file.endsWith('.ejs'));
+const directoryPath = path.join(__dirname, 'src', 'locales');
 
-const routesMap = JSON.parse(
-    fs.readFileSync('./src/config/routesMap.json', 'utf-8'),
-);
-
-for (const locale of locales) {
-    const strings = JSON.parse(
-        fs.readFileSync(`./src/locales/${locale}.json`, 'utf-8'),
-    );
-    for (const view of views) {
-        try {
-            const viewName = view.replace('.ejs', '');
+async function processLocale(locale) {
+    try {
+        const files = await fs.readdir(
+            path.join(__dirname, 'src', 'locales', locale),
+        );
+        for (const file of files) {
+            const strings = await fs.readFile(
+                path.join(directoryPath, locale, file),
+                'utf-8',
+            );
+            const template = JSON.parse(strings).template;
             const str = await ejs.renderFile(
-                `./src/views/${view}`,
-                { ...strings[viewName], locale },
+                path.join(__dirname, 'src', 'views', `${template}.ejs`),
+                { ...JSON.parse(strings), locale },
                 {},
             );
             const result = await posthtml().use(htmlnano()).process(str);
-            const outputDir = `./dist/${locale}`;
-            fs.mkdirSync(outputDir, { recursive: true });
+            const outputDir = path.join(__dirname, 'dist', locale);
+            await fs.mkdir(outputDir, { recursive: true });
 
-            const filename = routesMap[locale][view.replace('.ejs', '')];
-
-            fs.writeFileSync(
-                path.join(__dirname, `${outputDir}/${filename}.html`),
+            const filename = path.parse(file).name;
+            await fs.writeFile(
+                path.join(outputDir, `${filename}.html`),
                 result.html,
             );
-        } catch (err) {
-            console.error(err);
         }
+    } catch (err) {
+        console.error(err);
     }
 }
+
+async function processLocales() {
+    try {
+        const locales = await fs.readdir(directoryPath);
+        await Promise.all(locales.map(processLocale));
+    } catch (err) {
+        console.error('Error reading directory:', err);
+    }
+}
+
+processLocales();
