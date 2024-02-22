@@ -25,7 +25,7 @@ export const WebsiteRoutes = (fastify, opts, done) => {
             }
             const pageStrings = getPageStrings(lang, slug, rootDir);
             reply.view(`/server/views/${pageStrings.template}`, {
-                strings: pageStrings,
+                ...pageStrings,
                 locale: lang,
             });
         },

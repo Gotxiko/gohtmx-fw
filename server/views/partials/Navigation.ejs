@@ -1,2 +1,13 @@
-<a href="/<%=locale%>" hx-boost="true">Home</a>
-<a href="/<%=locale%>/nosotros" hx-boost="true">About</a>
+<% const navItems = [ { name: "Home", url: `/${locale}`, }, { name: "About",
+url: `/${locale}/nosotros`, }, ]; %>
+
+<header class="align-center flex w-full justify-center gap-8 py-4">
+    <% for(let item of navItems) { %>
+    <a
+        href="<%=item.url%>"
+        class="rounded-full bg-blue-500 px-8 py-2 text-white hover:bg-blue-700"
+    >
+        <%=item.name%>
+    </a>
+    <% } %>
+</header>
