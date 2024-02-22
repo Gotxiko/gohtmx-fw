@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Inicio",
+        "url": "/",
+        "icon": "home"
+    },
+    {
+        "name": "Nosotros",
+        "url": "/nosotros",
+        "icon": "info"
+    }
+]

@@ -9,7 +9,10 @@
  */
 
 import { validateLanguage } from '../utils/validateLanguage.js';
-import { getPageStrings } from '../middleware/websiteFunctions.js';
+import {
+    getPageStrings,
+    getNavMenuItems,
+} from '../middleware/websiteFunctions.js';
 
 export const WebsiteRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
@@ -24,8 +27,10 @@ export const WebsiteRoutes = (fastify, opts, done) => {
                 slug = lang === 'es' ? 'inicio' : 'home';
             }
             const pageStrings = getPageStrings(lang, slug, rootDir);
+            const navMenuItems = Object.values(getNavMenuItems(lang, rootDir));
             reply.view(`/server/views/${pageStrings.template}`, {
                 ...pageStrings,
+                navMenuItems,
                 locale: lang,
             });
         },

@@ -1,13 +1,10 @@
-<% const navItems = [ { name: "Home", url: `/${locale}`, }, { name: "About",
-url: `/${locale}/nosotros`, }, ]; %>
-
 <header class="align-center flex w-full justify-center gap-8 py-4">
-    <% for(let item of navItems) { %>
+    <% for(let navItem of navMenuItems) { %>
     <a
-        href="<%=item.url%>"
+        href="<%=navItem.url%>"
         class="rounded-full bg-blue-500 px-8 py-2 text-white hover:bg-blue-700"
     >
-        <%=item.name%>
+        <%=navItem.name%>
     </a>
     <% } %>
 </header>
