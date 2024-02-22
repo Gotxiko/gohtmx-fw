@@ -14,29 +14,6 @@ import { getPageStrings } from '../middleware/websiteFunctions.js';
 export const WebsiteRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
 
-    // fastify.setNotFoundHandler((req, reply) => {
-    //     reply.code(404).sendFile('404.html', { root: rootDir + '/public' });
-    // });
-    //
-    // fastify.route({
-    //     method: 'GET',
-    //     url: '/:lang/:slug?',
-    //     preValidation: validateLanguage,
-    //     handler: (req, reply) => {
-    //         let { lang, slug } = req.params;
-    //         if (slug == '404') {
-    //             reply.sendFile('404.html', { root: rootDir + '/public' });
-    //             return;
-    //         }
-    //         if (!slug) {
-    //             slug = lang === 'es' ? 'inicio' : 'home';
-    //         }
-    //         reply.sendFile(`${lang}/${slug}.html`, {
-    //             root: rootDir + '/dist/',
-    //         });
-    //     },
-    // });
-
     fastify.route({
         method: 'GET',
         url: '/:lang/:slug?',

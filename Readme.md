@@ -1,6 +1,57 @@
-# Project Name
+# Gtz Framework
 
-This project uses Gulp to automate the build process. The source files are located in the `src` directory, and the built files are output to the `dist` directory.
+This project aims to be a framework for creating simple multilanguage websites. Build custom routes with Fastify, and make use of HTMX for reactivity and requets. The project is built with EJS, SCSS and JS, and uses PM2 to keep the server running.
+
+## Folder structure
+
+```
+.
+├── dist
+│
+├── src
+│   ├── assets
+│   │   ├── css
+│   │   ├── img
+│   │   └── js
+│
+├── locales
+│
+├── server
+│   ├── config
+│   ├── database
+│   ├── middleware
+│   ├── routes
+│   ├── utils
+│   └── views
+│
+└── public
+
+```
+
+### dist
+
+dist holds the compiled files. The .scss and .js files are compiled into the dist folder. It also holds the optimized images.
+
+### src
+
+src holds the source files. The .scss, .js and images are located here. The .scss files are the styles and the .js files are the scripts. Images are located in the img folder.
+
+### locales
+
+locales holds the translations. Each language has its own folder, and inside it, a .json file for each page. Each .json filename is the same as the route we want to translate. The .json file contains the translations for the page, as well as the filename of the ejs template to use.
+
+For new pages, create a new .json file with the same name as the route, and add the translations for the page, as well as the template to use. Fastify routes will use the slug toload the proper ejs with the proper translations.
+
+### server
+
+server holds all the files that pertain to the SSR of the site.
+Inside server/views, there is also a partials folder. This holds all the partials we might want to include in our other ejs files.
+
+If you want to get a partial through a route through HTMX, make sure to create a folder with the partial name, and inside it, create a .ejs file with the same name as the route, and a langs.{LANG}.json file for the translations of that partial. This way, the server will know which partial to load when the route is called, and will load the proper translations.
+
+### public
+
+Put inside the public folder any static file you might want to serve from a route that does't depend on any SSR. For example, a favicon.ico file, a 404 page, robots.txt file...
 
 ## Getting Started
 
@@ -15,10 +66,22 @@ npm install
 ## Building the Project
 
 ```bash
-npm run build
+npm run build:all
+npm run build:bundle
+npm run build:images
 ```
 
-This command runs the compiles the .ejs, .scss and .js inside src into the dist directory. It will create a folder per language configured in build.js containing the .html files.
+These commands will compile the .scss and .js files, and optimize the images. All will be placed in the dist folder. all does bundle+images.
+
+The .scss contains TailwindCSS utility classes, and when building, it will scan the ejs files to compile only the necessary classes.
+
+## Watching for Changes
+
+```bash
+npm run watch
+```
+
+This will watch for changes in the .scss and .js files.
 
 ## Starting the Server with PM2
 
