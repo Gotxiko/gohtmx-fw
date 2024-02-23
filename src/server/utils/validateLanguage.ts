@@ -1,4 +1,4 @@
-export const validateLanguage = (request, reply, done) => {
+export const validateLanguage = (request: any, reply: any, done: any) => {
     const urlParts = request.raw.url.split('/');
     const lang = urlParts[1];
     const supportedLangs = ['es', 'en'];

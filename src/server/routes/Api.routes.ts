@@ -10,10 +10,10 @@
 
 // import { fn } from '../middleware/apiFunctions.js';
 
-export const APIRoutes = (fastify, opts, done) => {
-    const dir = opts['dir'];
+export const APIRoutes = (fastify: any, opts: any, done: any) => {
+  const dir = opts["dir"];
 
-    /* Routes go here */
+  /* Routes go here */
 
-    done();
+  done();
 };
