@@ -1,12 +1,12 @@
 [
     {
         "name": "Inicio",
-        "url": "/",
+        "url": "/es/",
         "icon": "home"
     },
     {
         "name": "Nosotros",
-        "url": "/nosotros",
+        "url": "/es/nosotros",
         "icon": "info"
     }
 ]
