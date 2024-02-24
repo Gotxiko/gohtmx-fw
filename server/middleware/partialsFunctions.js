@@ -10,3 +10,11 @@ export const getPartialStrings = (lang, name, rootDir) => {
     );
     return partialStrings;
 };
+
+export const verifyHxRequest = (request, reply, done) => {
+    const hxHeaders = request.headers['hx-request'];
+    if (hxHeaders !== 'true') {
+        reply.code(400).send('Bad Request');
+    }
+    done();
+};

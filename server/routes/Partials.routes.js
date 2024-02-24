@@ -8,7 +8,10 @@
  *
  */
 
-import { getPartialStrings } from '../middleware/partialsFunctions.js';
+import {
+    getPartialStrings,
+    verifyHxRequest,
+} from '../middleware/partialsFunctions.js';
 
 export const PartialsRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
@@ -16,18 +19,14 @@ export const PartialsRoutes = (fastify, opts, done) => {
     fastify.route({
         method: 'GET',
         url: '/partials/:name/:lang?',
+        preHandler: verifyHxRequest,
         handler: (req, reply) => {
-            const hxHeaders = req.headers['hx-request'];
-            if (hxHeaders !== 'true') {
-                return reply.code(403).send('Forbidden');
-            } else {
-                let { name, lang } = req.params;
-                const partialStrings = getPartialStrings(lang, name, rootDir);
-                reply.view(`/server/views/partials/${name}`, {
-                    locale: lang,
-                    strings: partialStrings,
-                });
-            }
+            let { name, lang } = req.params;
+            const partialStrings = getPartialStrings(lang, name, rootDir);
+            reply.view(`/server/views/partials/${name}`, {
+                locale: lang,
+                strings: partialStrings,
+            });
         },
     });
 
