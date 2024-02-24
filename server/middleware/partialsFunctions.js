@@ -4,10 +4,7 @@ import fs from 'fs';
 export const getPartialStrings = (lang, name, rootDir) => {
     const partialStrings = JSON.parse(
         fs.readFileSync(
-            path.join(
-                rootDir,
-                `./server/views/partials/${name}/langs.${lang}.json`,
-            ),
+            path.join(rootDir, `./locales/${lang}/partials/${name}.json`),
             'utf8',
         ),
     );

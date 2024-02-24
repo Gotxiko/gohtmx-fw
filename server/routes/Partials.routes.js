@@ -15,13 +15,19 @@ export const PartialsRoutes = (fastify, opts, done) => {
 
     fastify.route({
         method: 'GET',
-        url: '/:lang/partials/:name',
+        url: '/partials/:name/:lang?',
         handler: (req, reply) => {
-            const { lang, name } = req.params;
-            const partialStrings = getPartialStrings(lang, name, rootDir);
-            reply.view(`/server/views/partials/${name}/partial`, {
-                strings: partialStrings,
-            });
+            const hxHeaders = req.headers['hx-request'];
+            if (hxHeaders !== 'true') {
+                return reply.code(403).send('Forbidden');
+            } else {
+                let { name, lang } = req.params;
+                const partialStrings = getPartialStrings(lang, name, rootDir);
+                reply.view(`/server/views/partials/${name}`, {
+                    locale: lang,
+                    strings: partialStrings,
+                });
+            }
         },
     });
 
