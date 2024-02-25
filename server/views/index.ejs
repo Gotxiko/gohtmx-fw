@@ -6,21 +6,24 @@
         <script type="module" src="/assets/js/app.js"></script>
     </head>
 
-    <body class="w-full">
+    <body class="w-full bg-gray-700 font-mono">
         <main
             hx-swap="innerHTML transition:true"
-            class="flex h-auto w-full flex-col items-center justify-center p-4"
+            class="flex h-auto w-full flex-col items-center justify-center"
         >
             <%- include('partials/Navigation/NavWrapper') %>
-            <h1 class="text-2xl font-bold"><%=title%></h1>
-            <button
-                hx-get="/partials/htmx/<%=locale%>"
-                hx-target="#target"
-                hx-swap="innerHTML"
-            >
-                HTMX!
-            </button>
-            <div id="target"></div>
+            <div class="flex w-full p-4">
+                <div
+                    class="card h-100 w-4/12 rounded border border-gray-500 bg-gray-600 text-gray-300"
+                >
+                    <div class="card--title border-b border-gray-500 px-4 py-2">
+                        Card title
+                    </div>
+                    <div class="card--content px-4 py-2">
+                        Card contents Card contents Card contents Card contents
+                    </div>
+                </div>
+            </div>
         </main>
     </body>
 </html>

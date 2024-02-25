@@ -1,4 +1,6 @@
-<header class="align-center flex w-full justify-center gap-8 py-4">
+<header
+    class="align-center flex w-full gap-4 border-b border-gray-500 bg-gray-600 p-2"
+>
     <% for(let navItem of navMenuItems) { %> <%- include('NavItem', { navItem:
     navItem }) %> <% } %>
 </header>

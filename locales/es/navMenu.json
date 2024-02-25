@@ -3,10 +3,5 @@
         "name": "Inicio",
         "url": "/es/",
         "icon": "home"
-    },
-    {
-        "name": "Nosotros",
-        "url": "/es/nosotros",
-        "icon": "info"
     }
 ]

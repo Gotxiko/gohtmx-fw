@@ -3,10 +3,5 @@
         "name": "Home",
         "url": "/en/",
         "icon": "home"
-    },
-    {
-        "name": "About",
-        "url": "/en/about",
-        "icon": "info"
     }
 ]
