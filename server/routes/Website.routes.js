@@ -25,7 +25,6 @@ export const WebsiteRoutes = (fastify, opts, done) => {
             if (!slug) {
                 slug = lang === 'es' ? 'inicio' : 'home';
             }
-            console.log(`/pages/${lang}/${slug}`);
             reply.view(`/pages/${lang}/${slug}`, {
                 locale: lang,
             });
