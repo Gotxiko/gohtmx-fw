@@ -7,12 +7,6 @@
     </head>
 
     <body>
-        <h1 class="text-black">Contenidos de la página</h1>
-        <button hx-get="/partials/partial" hx-swap="innerHTML">
-            Obtener htmx partial
-        </button>
-        <br />
-        <h1>{{i18n "index.title"}}</h1>
-        <p>{{i18n "index.title"}}</p>
+        <h1 class="text-black">{{ .title }}</h1>
     </body>
 </html>

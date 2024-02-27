@@ -2,65 +2,94 @@ package routes
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
-	"log"
+	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 
 	"github.com/gorilla/mux"
-	"github.com/nicksnyder/go-i18n/v2/i18n"
-	"golang.org/x/text/language"
 )
 
-var bundle *i18n.Bundle
-var slugToFileMap map[string]string
+type SlugMap map[string]string
+type Langs map[string]interface{}
+
+var langs map[string]Langs
 
 func init() {
-	bundle = i18n.NewBundle(language.Spanish)
-	bundle.MustLoadMessageFile("locales/es/langs.json")
-	bundle.MustLoadMessageFile("locales/en/langs.json")
-
-	loadSlugToFileMap()
+    langs = make(map[string]Langs)
+    for _, lang := range []string{"en", "es"} {
+        langData, err := loadLangs(lang)
+        if err != nil {
+            panic(err)
+        }
+        langs[lang] = langData
+    }
 }
 
 func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	lang := vars["lang"]
 	slug := vars["slug"]
+	w.WriteHeader(http.StatusOK)
 
-	if fileName, ok := slugToFileMap[slug]; ok {
-        slug = fileName
-    }
-
-	localizer := i18n.NewLocalizer(bundle, lang)
-
-	tmpl, err := template.New(filepath.Join("pages", slug + ".html")).Funcs(template.FuncMap{
-		"i18n": func(id string) string {
-			return localizer.MustLocalize(&i18n.LocalizeConfig{DefaultMessage: &i18n.Message{ID: id}})
-		},
-	}).ParseFiles(filepath.Join("pages", slug + ".html"))
-
+	filename, err := getFilenameFromSlug(slug)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	err = tmpl.Execute(w, nil)
+	tmpl, err := template.ParseFiles(filepath.Join("pages", filename + ".html"))
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	langData, ok := langs[lang][filename].(map[string]interface{})
+	if !ok {
+		http.Error(w, "Language or slug not found", http.StatusNotFound)
+		return
+	}
+
+	err = tmpl.Execute(w, langData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
 
-func loadSlugToFileMap() {
-    jsonFile, err := os.Open("locales/slugToFileMap.json")
+func loadLangs(lang string) (Langs, error) {
+    jsonFile, err := os.Open(fmt.Sprintf("locales/%s/langs.json", lang))
     if err != nil {
-        log.Fatal(err)
+        return nil, err
     }
     defer jsonFile.Close()
 
-    err = json.NewDecoder(jsonFile).Decode(&slugToFileMap)
+    byteValue, err := io.ReadAll(jsonFile)
     if err != nil {
-        log.Fatal(err)
+        return nil, err
     }
+
+    var langs Langs
+    json.Unmarshal(byteValue, &langs)
+
+    return langs, nil
+}
+
+func getFilenameFromSlug(slug string) (string, error) {
+    jsonFile, err := os.Open("locales/slugToFileMap.json")
+    if err != nil {
+        return "", err
+    }
+    defer jsonFile.Close()
+
+    byteValue, err := io.ReadAll(jsonFile)
+    if err != nil {
+        return "", err
+	}
+
+    var slugMap SlugMap
+    json.Unmarshal(byteValue, &slugMap)
+
+    return slugMap[slug], nil
 }
