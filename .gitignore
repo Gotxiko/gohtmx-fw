@@ -8,3 +8,6 @@ dist
 *.code-workspace
 .zed
 .temp
+supervisord.log
+supervisord.pid
+start
