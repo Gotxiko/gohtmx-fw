@@ -23,7 +23,7 @@ export const PartialsRoutes = (fastify, opts, done) => {
         handler: (req, reply) => {
             let { name, lang } = req.params;
             const partialStrings = getPartialStrings(lang, name, rootDir);
-            reply.view(`/server/views/partials/${name}`, {
+            reply.view(`/partials/${name}`, {
                 locale: lang,
                 strings: partialStrings,
             });

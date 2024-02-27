@@ -11,7 +11,7 @@ import { dirname } from 'path';
 
 import { WebsiteRoutes } from './server/routes/Website.routes.js';
 import { PartialsRoutes } from './server/routes/Partials.routes.js';
-import { APIRoutes } from './server/routes/Api.routes.js';
+// import { APIRoutes } from './server/routes/Api.routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,7 +33,7 @@ fastify.register(staticPlugin, {
 
 fastify.register(WebsiteRoutes, { rootDir: __dirname });
 fastify.register(PartialsRoutes, { rootDir: __dirname });
-fastify.register(APIRoutes, { rootDir: __dirname });
+// fastify.register(APIRoutes, { rootDir: __dirname });
 
 fastify
     .listen({ port: port })

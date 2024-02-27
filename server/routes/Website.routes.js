@@ -8,11 +8,10 @@
  *
  */
 
-import { validateLanguage } from '../utils/validateLanguage.js';
-import {
-    getPageStrings,
-    getNavMenuItems,
-} from '../middleware/websiteFunctions.js';
+import { validateRoute } from '../utils/validateRoute.js';
+
+import fs from 'fs';
+import path from 'path';
 
 export const WebsiteRoutes = (fastify, opts, done) => {
     const rootDir = opts['rootDir'];
@@ -20,17 +19,14 @@ export const WebsiteRoutes = (fastify, opts, done) => {
     fastify.route({
         method: 'GET',
         url: '/:lang/:slug?',
-        preValidation: validateLanguage,
+        // preValidation: (req, reply, done) => validateRoute(req, reply, done),
         handler: (req, reply) => {
             let { lang, slug } = req.params;
             if (!slug) {
                 slug = lang === 'es' ? 'inicio' : 'home';
             }
-            const pageStrings = getPageStrings(lang, slug, rootDir);
-            const navMenuItems = Object.values(getNavMenuItems(lang, rootDir));
-            reply.view(`/server/views/${pageStrings.template}`, {
-                ...pageStrings,
-                navMenuItems,
+            console.log(`/pages/${lang}/${slug}`);
+            reply.view(`/pages/${lang}/${slug}`, {
                 locale: lang,
             });
         },
