@@ -1,4 +1,4 @@
-package websiteRoutes
+package routes
 
 import (
     "encoding/json"
@@ -9,7 +9,7 @@ import (
     "strings"
 )
 
-func HandleRequest(w http.ResponseWriter, r *http.Request) {
+func HandleWebsiteRequest(w http.ResponseWriter, r *http.Request) {
     path := r.URL.Path
 
     if strings.HasSuffix(path, "/") {
