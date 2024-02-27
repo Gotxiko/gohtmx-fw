@@ -1,17 +1,19 @@
 package main
 
 import (
-	"gtz-main/server/middleware"
-	"gtz-main/server/routes"
 	"net/http"
+
+	"gtz-main/server/routes"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
 
-	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
+	r := mux.NewRouter()
+	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
+	// r.HandleFunc("/", Homehandler)
+	r.HandleFunc("/{lang}/{slug}", routes.WebsiteHandler)
 
-	http.Handle("/partials/", middleware.LoggingMiddleware(http.HandlerFunc(routes.HandlePartialRequest)))
-	http.Handle("/", middleware.LoggingMiddleware(http.HandlerFunc(routes.HandleWebsiteRequest)))
-
-	http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3000", r)
 }
