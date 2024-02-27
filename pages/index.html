@@ -1,15 +1,15 @@
 <!doctype html>
-<html>
+<html lang="es">
     <head>
-        <title>{{.title}}</title>
+        <title>Título de la página</title>
         <link rel="stylesheet" href="/assets/css/app.css" />
         <script src="/assets/js/app.js"></script>
     </head>
 
     <body>
-        <h1 class="text-black">{{.body}}</h1>
+        <h1 class="text-black">Contenidos de la página</h1>
         <button hx-get="/partials/partial" hx-swap="innerHTML">
-            get htmx partial
+            Obtener htmx partial
         </button>
     </body>
 </html>
