@@ -33,34 +33,9 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	lang, langExists := vars["lang"]
 	slug, slugExists := vars["slug"]
 
-	// Handle the root route "/"
-	if r.URL.Path == "/" {
-		http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		return
-	}
-
-	// Handle the "/es/" and "/en/" routes
-	if !langExists || (langExists && slug == "") {
-		switch lang {
-		case "es":
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		case "en":
-			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
-		default:
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		}
-		return
-	}
-
-	// Existing code for handling "/:lang/:slug" routes
-	if !slugExists {
-		switch lang {
-		case "es":
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		case "en":
-			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
-		}
-	}
+	// Handle possible redirections for root route, language routes and slug routes.
+	// If route does nto meet any of the conditions inside the function, it will go on as normal and do nothing.
+	handleDefaultRedirections(w, r, lang, langExists, slug, slugExists)
 
 	w.WriteHeader(http.StatusOK)
 
@@ -85,6 +60,35 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	err = tmpl.Execute(w, langData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slug string, slugExists bool) {
+    // Handle the root route "/"
+	if r.URL.Path == "/" {
+		http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+	}
+
+	// Handle the "/es/" and "/en/" routes
+	if !langExists || (langExists && slug == "") {
+		switch lang {
+		case "es":
+			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+		case "en":
+			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
+		default:
+			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+		}
+	}
+
+	// Existing code for handling "/:lang/:slug" routes
+	if !slugExists {
+		switch lang {
+		case "es":
+			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+		case "en":
+			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
+		}
 	}
 }
 
