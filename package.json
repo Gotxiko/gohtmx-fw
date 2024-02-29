@@ -7,7 +7,12 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "prettier --write . && gofmt -w .",
         "watch": "parcel watch src/**/*.scss src/**/*.js --dist-dir dist/assets",
-        "build": "parcel build src/**/*.scss src/**/*.js --dist-dir dist/assets --no-scope-hoist"
+        "build": "parcel build src/**/*.scss src/**/*.js --dist-dir dist/assets --no-scope-hoist",
+        "start": "pm2 start start --name www",
+        "build:start": "npm run build && go build start.go && npm run start",
+        "build:restart": "npm run build && go build start.go && pm2 restart www",
+        "restart": "pm2 restart www",
+        "delete-all": "pm2 delete all"
     },
     "author": "",
     "license": "ISC",
@@ -30,6 +35,7 @@
         "postcss-import": "^16.0.1",
         "prettier": "^3.2.5",
         "prettier-plugin-tailwindcss": "^0.5.11",
+        "process": "^0.11.10",
         "sharp": "^0.33.2",
         "style-loader": "^3.3.4",
         "svgo": "^3.2.0",
