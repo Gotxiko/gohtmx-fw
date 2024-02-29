@@ -16,6 +16,7 @@ type SlugMap map[string]string
 type Langs map[string]interface{}
 
 var langs map[string]Langs
+var slugMap SlugMap
 
 func init() {
 	langs = make(map[string]Langs)
@@ -26,6 +27,8 @@ func init() {
 		}
 		langs[lang] = langData
 	}
+
+	loadSlugMap()
 }
 
 func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,19 +42,15 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 
-	filename, err := getFilenameFromSlug(slug)
+	page := slugMap[slug]
+
+	tmpl, err := template.ParseFiles(filepath.Join("pages", page+".html"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	tmpl, err := template.ParseFiles(filepath.Join("pages", filename+".html"))
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	langData, ok := langs[lang][filename].(map[string]interface{})
+	langData, ok := langs[lang][page].(map[string]interface{})
 	if !ok {
 		http.Error(w, "Language or slug not found", http.StatusNotFound)
 		return
@@ -111,20 +110,20 @@ func loadLangs(lang string) (Langs, error) {
 	return langs, nil
 }
 
-func getFilenameFromSlug(slug string) (string, error) {
+func loadSlugMap() {
 	jsonFile, err := os.Open("locales/slugToFileMap.json")
-	if err != nil {
-		return "", err
-	}
-	defer jsonFile.Close()
+    if err != nil {
+        panic(err)
+    }
+    defer jsonFile.Close()
 
-	byteValue, err := io.ReadAll(jsonFile)
-	if err != nil {
-		return "", err
-	}
+    byteValue, err := io.ReadAll(jsonFile)
+    if err != nil {
+        panic(err)
+    }
 
-	var slugMap SlugMap
-	json.Unmarshal(byteValue, &slugMap)
-
-	return slugMap[slug], nil
+    err = json.Unmarshal(byteValue, &slugMap)
+    if err != nil {
+        panic(err)
+    }
 }

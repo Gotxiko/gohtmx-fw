@@ -16,7 +16,6 @@ func PartialsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Load langs file from the request header language to send the proper language contents to the partial
 	lang := r.Header.Get("Accept-Language")
 
 	langData, ok := langs[lang][name].(map[string]interface{})
