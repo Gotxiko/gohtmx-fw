@@ -34,7 +34,7 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	slug, slugExists := vars["slug"]
 
 	// Handle possible redirections for root route, language routes and slug routes.
-	// If route does nto meet any of the conditions inside the function, it will go on as normal and do nothing.
+	// If route does not meet any of the conditions inside the function, it will go on as normal and do nothing.
 	handleDefaultRedirections(w, r, lang, langExists, slug, slugExists)
 
 	w.WriteHeader(http.StatusOK)
@@ -64,7 +64,7 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slug string, slugExists bool) {
-    // Handle the root route "/"
+	// Handle the root route "/"
 	if r.URL.Path == "/" {
 		http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
 	}
