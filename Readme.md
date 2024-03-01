@@ -15,16 +15,14 @@ This project aims to be a framework for creating simple multilanguage websites. 
 │   │   └── js
 │
 ├── locales
+├── pages
+├── partials
 │
-├── server
-│   ├── config
-│   ├── database
-│   ├── middleware
-│   ├── routes
-│   ├── utils
-│   └── views
-│
-└── public
+└── server
+    ├── middleware
+    ├── routes
+    └── functions
+
 
 ```
 
@@ -44,14 +42,7 @@ For new pages, create a new .json file with the same name as the route, and add 
 
 ### server
 
-server holds all the files that pertain to the SSR of the site.
-Inside server/views, there is also a partials folder. This holds all the partials we might want to include in our other ejs files.
-
-If you want to get a partial through a route through HTMX, make sure to create a folder with the partial name, and inside it, create a .ejs file with the same name as the route, and a langs.{LANG}.json file for the translations of that partial. This way, the server will know which partial to load when the route is called, and will load the proper translations.
-
-### public
-
-Put inside the public folder any static file you might want to serve from a route that does't depend on any SSR. For example, a favicon.ico file, a 404 page, robots.txt file...
+server holds all the files that pertain to the SSR of the site. All in Go, using mux for routing.
 
 ## Getting Started
 
@@ -66,14 +57,17 @@ npm install
 ## Building the Project
 
 ```bash
-npm run build:all
-npm run build:bundle
-npm run build:images
+npm run build
 ```
 
 These commands will compile the .scss and .js files, and optimize the images. All will be placed in the dist folder. all does bundle+images.
-
 The .scss contains TailwindCSS utility classes, and when building, it will scan the ejs files to compile only the necessary classes.
+
+To build the Go application:
+
+```bash
+go build -o gtz-app start.go
+```
 
 ## Watching for Changes
 
@@ -96,20 +90,9 @@ npm install -g pm2
 Once PM2 is installed, you can start your server with the production environment with the following command:
 
 ```bash
-npm run prod-start
+npm run build:start
 ```
-
-To start as the development environment:
-
-```bash
-npm run dev-start
-```
-
-To watch for changes. This will just watch .scss and .js. The rest of the contents, .ejs, locales... are run and rendered by the server, no build neccessary after changes:
-
-```bash
-npm run watch
-```
+This will build everything the application needs, First, with Parcel, it will build the styles and scripts. Then, it will build the Go application, and thens start a PM2 process named www, which will serve in localhost:3000.
 
 To stop and remove all pm2 processes:
 
@@ -117,32 +100,32 @@ To stop and remove all pm2 processes:
 npm run delete-all
 ```
 
-To remove all pm2 processes and start a new one as production:
-
-```bash
-npm run delete-restart
-```
-
 ## PM2 MANUAL COMMANDS
 
 This command will start your server and display a table with information about the running process. The table includes the process ID, which you can use to manage the process with PM2.
 
-If you make changes to your server.js file, you need to restart your server for those changes to take effect. You can do this with the pm2 restart command:
+```bash
+pm2 start [built_go_filename]
+```
+
+IMPORTANT: PM2 CAN ONLY START A BUILT GO APPLICATION. FOR DEVELOPMENT, RUN go run start.go
+
+If you make changes to your .go files, you need to restart your server for those changes to take effect. You can do this with the pm2 restart command:
 
 ```bash
-pm2 restart app.js
+pm2 restart [id]
 ```
 
 To stop your server, you can use the pm2 stop command:
 
 ```bash
-pm2 stop app.js
+pm2 stop [id]
 ```
 
 And to remove your server from PM2's process list, you can use the pm2 delete command:
 
 ```bash
-pm2 delete app.js
+pm2 delete [id]
 ```
 
 ## Creating the PM2 process
@@ -150,7 +133,7 @@ pm2 delete app.js
 To create a PM2 process in the server (local, development or production server), execute the following command:
 
 ```bash
-pm2 start app.js npm --name "PROCESS_NAME" -- run start
+pm2 start start npm --name "PROCESS_NAME" -- run start
 ```
 
 Then you can use the normal start, stop, restart, delete, watch... commands for that process. You can use the name or the id.

@@ -12,3 +12,4 @@ supervisord.log
 supervisord.pid
 start
 gtz-main
+gtz-app

@@ -8,9 +8,9 @@
         "format": "prettier --write . && gofmt -w .",
         "watch": "parcel watch src/**/*.scss src/**/*.js --dist-dir dist/assets",
         "build": "parcel build src/**/*.scss src/**/*.js --dist-dir dist/assets --no-scope-hoist",
-        "start": "pm2 start start --name www",
-        "build:start": "npm run build && go build start.go && npm run start",
-        "build:restart": "npm run build && go build start.go && pm2 restart www",
+        "start": "pm2 start gtz-app --name www",
+        "build:start": "npm run build && go build -o gtz-app start.go && npm run start",
+        "build:restart": "npm run build && go build -o gtz-app start.go && pm2 restart www",
         "restart": "pm2 restart www",
         "delete-all": "pm2 delete all"
     },
