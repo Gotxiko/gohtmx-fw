@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 )
 
@@ -16,14 +17,21 @@ var slugMap SlugMap
 
 func init() {
 	langs = make(map[string]Langs)
-	for _, lang := range []string{"en", "es"} {
-		langData, err := loadLangs(lang)
-		if err != nil {
-			panic(err)
-		}
-		langs[lang] = langData
+	files, err := os.ReadDir("locales")
+	if err != nil {
+		log.Fatal(err)
 	}
-
+	for _, file := range files {
+		if file.IsDir() {
+			lang := file.Name()
+			langData, err := loadLangs(lang)
+			if err != nil {
+				panic(err)
+			}
+			langs[lang] = langData
+		}
+	}
+	
 	loadSlugMap()
 }
 

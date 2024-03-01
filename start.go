@@ -14,6 +14,8 @@ func main() {
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler)
 	r.HandleFunc("/{lang}/{slug}", routes.WebsiteHandler)
+	r.HandleFunc("/{lang}", routes.WebsiteHandler)
+	r.HandleFunc("/", routes.WebsiteHandler)
 
 	http.ListenAndServe(":3000", r)
 }

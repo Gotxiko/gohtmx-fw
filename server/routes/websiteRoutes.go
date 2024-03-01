@@ -1,7 +1,7 @@
 package routes
 
 import (
-	loadJson "gtz-main/server"
+	loadJson "gtz-main/server/functions"
 	"html/template"
 	"net/http"
 	"path/filepath"
@@ -13,23 +13,23 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	lang, langExists := vars["lang"]
 	slug, slugExists := vars["slug"]
-
-	handleDefaultRedirections(w, r, lang, langExists, slugExists)
-
-	w.WriteHeader(http.StatusOK)
+	if handleDefaultRedirections(w, r, lang, langExists, slugExists) {
+		return
+	}
 
 	slugMap := loadJson.GetSlugMap()
 	page := slugMap[slug]
 
 	tmpl, err := template.ParseFiles(filepath.Join("pages", page+".html"))
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	
+
 	langs := loadJson.GetLangs()
 	langData, ok := langs[lang][page].(map[string]interface{})
-	
+	langData["lang"] = lang
+
 	if !ok {
 		http.Error(w, "Language or slug not found", http.StatusNotFound)
 		return
@@ -41,19 +41,23 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slugExists bool) {
+func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slugExists bool) bool {
 	if !langExists {
-		http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+		http.Redirect(w, r, "/es/inicio", http.StatusFound)
+		return true
 	}
 
-	if langExists && !slugExists {
+	if !slugExists {
 		switch lang {
-			case "es":
-				http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-			case "en":
-				http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
-			default:
-				http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+		case "es":
+			http.Redirect(w, r, "/es/inicio", http.StatusFound)
+		case "en":
+			http.Redirect(w, r, "/en/home", http.StatusFound)
+		default:
+			http.Redirect(w, r, "/es/inicio", http.StatusFound)
 		}
+		return true
 	}
+
+	return false
 }

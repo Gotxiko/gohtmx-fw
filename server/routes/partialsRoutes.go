@@ -1,7 +1,7 @@
 package routes
 
 import (
-	loadJson "gtz-main/server"
+	loadJson "gtz-main/server/functions"
 	"html/template"
 	"net/http"
 	"path/filepath"
