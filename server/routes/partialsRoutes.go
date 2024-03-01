@@ -1,6 +1,7 @@
 package routes
 
 import (
+	loadJson "gtz-main/server"
 	"html/template"
 	"net/http"
 	"path/filepath"
@@ -18,6 +19,7 @@ func PartialsHandler(w http.ResponseWriter, r *http.Request) {
 
 	lang := r.Header.Get("Accept-Language")
 
+	langs := loadJson.GetLangs()
 	langData, ok := langs[lang][name].(map[string]interface{})
 	if !ok {
 		http.Error(w, "Language or slug not found", http.StatusNotFound)

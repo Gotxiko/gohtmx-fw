@@ -1,47 +1,24 @@
 package routes
 
 import (
-	"encoding/json"
-	"fmt"
+	loadJson "gtz-main/server"
 	"html/template"
-	"io"
 	"net/http"
-	"os"
 	"path/filepath"
 
 	"github.com/gorilla/mux"
 )
-
-type SlugMap map[string]string
-type Langs map[string]interface{}
-
-var langs map[string]Langs
-var slugMap SlugMap
-
-func init() {
-	langs = make(map[string]Langs)
-	for _, lang := range []string{"en", "es"} {
-		langData, err := loadLangs(lang)
-		if err != nil {
-			panic(err)
-		}
-		langs[lang] = langData
-	}
-
-	loadSlugMap()
-}
 
 func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	lang, langExists := vars["lang"]
 	slug, slugExists := vars["slug"]
 
-	// Handle possible redirections for root route, language routes and slug routes.
-	// If route does not meet any of the conditions inside the function, it will go on as normal and do nothing.
-	handleDefaultRedirections(w, r, lang, langExists, slug, slugExists)
+	handleDefaultRedirections(w, r, lang, langExists, slugExists)
 
 	w.WriteHeader(http.StatusOK)
 
+	slugMap := loadJson.GetSlugMap()
 	page := slugMap[slug]
 
 	tmpl, err := template.ParseFiles(filepath.Join("pages", page+".html"))
@@ -49,8 +26,10 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
+	
+	langs := loadJson.GetLangs()
 	langData, ok := langs[lang][page].(map[string]interface{})
+	
 	if !ok {
 		http.Error(w, "Language or slug not found", http.StatusNotFound)
 		return
@@ -62,68 +41,19 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slug string, slugExists bool) {
-	// Handle the root route "/"
-	if r.URL.Path == "/" {
+func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slugExists bool) {
+	if !langExists {
 		http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
 	}
 
-	// Handle the "/es/" and "/en/" routes
-	if !langExists || (langExists && slug == "") {
+	if langExists && !slugExists {
 		switch lang {
-		case "es":
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		case "en":
-			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
-		default:
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+			case "es":
+				http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
+			case "en":
+				http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
+			default:
+				http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
 		}
 	}
-
-	// Existing code for handling "/:lang/:slug" routes
-	if !slugExists {
-		switch lang {
-		case "es":
-			http.Redirect(w, r, "/es/inicio", http.StatusMovedPermanently)
-		case "en":
-			http.Redirect(w, r, "/en/home", http.StatusMovedPermanently)
-		}
-	}
-}
-
-func loadLangs(lang string) (Langs, error) {
-	jsonFile, err := os.Open(fmt.Sprintf("locales/%s/langs.json", lang))
-	if err != nil {
-		return nil, err
-	}
-	defer jsonFile.Close()
-
-	byteValue, err := io.ReadAll(jsonFile)
-	if err != nil {
-		return nil, err
-	}
-
-	var langs Langs
-
-	json.Unmarshal(byteValue, &langs)
-
-	return langs, nil
-}
-
-func loadSlugMap() {
-	jsonFile, err := os.Open("locales/slugToFileMap.json")
-    if err != nil {
-        panic(err)
-    }
-    defer jsonFile.Close()
-
-    byteValue, err := io.ReadAll(jsonFile)
-    if err != nil {
-        panic(err)
-    }
-
-    err = json.Unmarshal(byteValue, &slugMap)
-    if err != nil {
-        panic(err)
-    }
 }

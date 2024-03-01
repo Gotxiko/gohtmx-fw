@@ -1,6 +1,8 @@
 {
     "index": {
-        "title": "Index",
-        "description": "This is the index page"
+        "title": "Home"
+    },
+    "partial": {
+        "text": "HTMX!"
     }
 }

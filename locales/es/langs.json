@@ -1,5 +1,8 @@
 {
     "index": {
-        "title": "Index"
+        "title": "Inicio"
+    },
+    "partial": {
+        "text": "HTMX!"
     }
 }
