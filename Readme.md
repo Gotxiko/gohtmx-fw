@@ -4,7 +4,7 @@ This project aims to be a framework for creating simple multilanguage websites u
 
 ## Folder structure
 
-```
+```text
 .
 ├── dist
 │
@@ -22,7 +22,6 @@ This project aims to be a framework for creating simple multilanguage websites u
     ├── middleware
     ├── routes
     └── functions
-
 
 ```
 
@@ -92,6 +91,7 @@ Once PM2 is installed, you can start your server with the production environment
 ```bash
 npm run build:start
 ```
+
 This will build everything the application needs, First, with Parcel, it will build the styles and scripts. Then, it will build the Go application, and thens start a PM2 process named www, which will serve in localhost:3000.
 
 To stop and remove all pm2 processes:
