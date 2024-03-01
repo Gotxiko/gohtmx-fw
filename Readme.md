@@ -1,6 +1,6 @@
-# Gtz Framework
+# Gtz Framework - GO + HTMX
 
-This project aims to be a framework for creating simple multilanguage websites. Build custom routes with Fastify, and make use of HTMX for reactivity and requets. The project is built with EJS, SCSS and JS, and uses PM2 to keep the server running.
+This project aims to be a framework for creating simple multilanguage websites using Go. Build custom routes with mux, and make use of HTMX for reactivity and requests. The project is built with GO, HTML(X), SCSS and JS, and uses PM2 to keep the server running.
 
 ## Folder structure
 
@@ -9,10 +9,10 @@ This project aims to be a framework for creating simple multilanguage websites. 
 ├── dist
 │
 ├── src
-│   ├── assets
-│   │   ├── css
-│   │   ├── img
-│   │   └── js
+│   └── assets
+│       ├── css
+│       ├── img
+│       └── js
 │
 ├── locales
 ├── pages
@@ -36,13 +36,13 @@ src holds the source files. The .scss, .js and images are located here. The .scs
 
 ### locales
 
-locales holds the translations. Each language has its own folder, and inside it, a .json file for each page. Each .json filename is the same as the route we want to translate. The .json file contains the translations for the page, as well as the filename of the ejs template to use.
+locales holds the translations. Each language has its own folder, and inside it, a .json file with all the contents. The .json file holds a key per page/partial. Use the names of the html files for the keys, not the route/slug/name used to access it.
 
-For new pages, create a new .json file with the same name as the route, and add the translations for the page, as well as the template to use. Fastify routes will use the slug toload the proper ejs with the proper translations.
+For new pages, add to locales/slugToFileMap.json the routes we want to be accessible to the user. Key is the slug/route, its value the filename of the HTML to load.
 
 ### server
 
-server holds all the files that pertain to the SSR of the site. All in Go, using mux for routing.
+Holds all the files that pertain to the SSR of the site. All in Go, using mux for routing.
 
 ## Getting Started
 
