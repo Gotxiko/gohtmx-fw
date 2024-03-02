@@ -4,7 +4,6 @@ import (
 	loadJson "gtz-main/server/functions"
 	"html/template"
 	"net/http"
-	"path/filepath"
 
 	"github.com/gorilla/mux"
 )
@@ -20,7 +19,18 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	slugMap := loadJson.GetSlugMap()
 	page := slugMap[slug]
 
-	tmpl, err := template.ParseFiles(filepath.Join("pages", page+".html"))
+	// Create an empty, unnamed template
+	tmpl := template.New("")
+
+	// Parse the specific page
+	_, err := tmpl.New(page).ParseFiles("pages/" + page + ".html")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusNotFound)
+		return
+	}
+
+	// Parse the components
+	_, err = tmpl.ParseGlob("components/*.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
@@ -35,7 +45,8 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err = tmpl.Execute(w, langData)
+	// Execute the specific template
+	err = tmpl.ExecuteTemplate(w, page, langData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}

@@ -1,13 +1,15 @@
+{{define "index"}}
 <!doctype html>
 <html lang="{{.lang}}">
     <head>
-        <title>Título de la página</title>
+        <title>{{ .title }}</title>
         <link rel="stylesheet" href="/assets/css/app.css" />
         <script src="/assets/js/app.js"></script>
     </head>
 
-    <body>
-        <h1 class="text-black text-2xl">{{ .title }}</h1>
-        <button hx-get="/partial/partial" class="text-white py-2 px-4 bg-blue-500 rounded-3xl">Cargar parcial</button>
+    <body class="bg-gray-200">
+        {{ template "header" }}
+        {{ template "footer" }}
     </body>
 </html>
+{{end}}
