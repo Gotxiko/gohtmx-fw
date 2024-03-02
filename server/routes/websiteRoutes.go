@@ -28,7 +28,7 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-	_, err = tmpl.ParseGlob("components/base/*.html")
+	_, err = tmpl.ParseGlob("components/shared/*.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
