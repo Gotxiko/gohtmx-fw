@@ -1,4 +1,6 @@
 {
     "inicio": "index",
-    "home": "index"
+    "home": "index",
+    "about": "index",
+    "contact": "index"
 }

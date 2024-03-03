@@ -17,8 +17,8 @@ func main() {
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler)
 
 	// Handle routes with or without lang and slug
-	r.HandleFunc("/{lang}/{slug}", routes.WebsiteHandler)
-	r.HandleFunc("/{lang}", routes.WebsiteHandler)
+	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler)
+	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler)
 	r.HandleFunc("/", routes.WebsiteHandler)
 
 	http.ListenAndServe(":3000", r)

@@ -13,8 +13,17 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	lang, langExists := vars["lang"]
 	slug, slugExists := vars["slug"]
-	if handleDefaultRedirections(w, r, lang, langExists, slugExists) {
-		return
+
+	if !langExists {
+		lang = "es"
+	}
+
+	if !slugExists {
+		if lang == "es" {
+			slug = "inicio"
+		} else {
+			slug = "home"
+		}
 	}
 
 	// Get the name of the template to be rendered
@@ -33,7 +42,6 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
-
 	// Parse the components specific to the requested page,
 	_, err = tmpl.ParseGlob("components/" + page + "/*.html")
 	if err != nil {
@@ -48,6 +56,7 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	langData["lang"] = lang
+	langData["slug"] = slug
 
 	// Execute the template
 	err = tmpl.ExecuteTemplate(w, page, langData)
@@ -55,20 +64,4 @@ func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-}
-
-func handleDefaultRedirections(w http.ResponseWriter, r *http.Request, lang string, langExists bool, slugExists bool) bool {
-	if !langExists || !slugExists {
-		switch lang {
-		case "es":
-			http.Redirect(w, r, "/es/inicio", http.StatusFound)
-		case "en":
-			http.Redirect(w, r, "/en/home", http.StatusFound)
-		default:
-			http.Redirect(w, r, "/es/inicio", http.StatusFound)
-		}
-		return true
-	}
-
-	return false
 }

@@ -2,24 +2,26 @@
 <header class="fixed flex w-full justify-center p-8 align-middle">
     <nav class="rounded-full p-4 backdrop-blur-sm">
         <ul class="flex flex-row gap-4">
+            {{ $activeClasses := "rounded-full text-white bg-gray-800 px-8 py-3 font-semibold transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
+            {{ $commonClasses := "rounded-full px-8 py-3 font-semibold text-gray-800 transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
             <li>
                 <a
-                    class="rounded-full bg-gray-800 px-8 py-3 font-semibold text-white transition-all ease-in-out hover:bg-gray-800"
-                    href="/"
+                    class='{{if eq .slug "inicio"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
+                    href="/{{.lang}}"
                     >Inicio</a
                 >
             </li>
             <li>
                 <a
-                    class="rounded-full px-8 py-3 font-semibold text-gray-800 transition-all ease-in-out hover:bg-gray-800 hover:text-white"
-                    href="/about"
+                    class='{{if eq .slug "about"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
+                    href="/{{.lang}}/about"
                     >Sobre nosotros</a
                 >
             </li>
             <li>
                 <a
-                    class="rounded-full px-8 py-3 font-semibold text-gray-800 transition-all ease-in-out hover:bg-gray-800 hover:text-white"
-                    href="/contact"
+                    class='{{if eq .slug "contact"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
+                    href="/{{.lang}}/contact"
                     >Contacto</a
                 >
             </li>
