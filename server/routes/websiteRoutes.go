@@ -1,7 +1,6 @@
 package routes
 
 import (
-	"fmt"
 	loadJson "gtz-main/server/functions"
 	"html/template"
 	"net/http"
@@ -9,59 +8,50 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func WebsiteHandler(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	lang, langExists := vars["lang"]
-	slug, slugExists := vars["slug"]
+func WebsiteHandler(tmpls *template.Template) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		vars := mux.Vars(r)
+		lang, langExists := vars["lang"]
+		slug, slugExists := vars["slug"]
 
-	if !langExists {
-		lang = "es"
-	}
-
-	if !slugExists {
-		if lang == "es" {
-			slug = "inicio"
-		} else {
-			slug = "home"
+		if !langExists {
+			lang = "es"
 		}
-	}
 
-	// Get the name of the template to be rendered
-	slugMap := loadJson.GetSlugMap()
-	page := slugMap[slug]
+		if !slugExists {
+			if lang == "es" {
+				slug = "inicio"
+			} else {
+				slug = "home"
+			}
+		}
 
-	// Parse the requested page and all components
-	tmpl := template.New("")
-	_, err := tmpl.New(page).ParseFiles("pages/" + page + ".html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-	}
-	_, err = tmpl.ParseGlob("components/shared/*.html")
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusNotFound)
-		return
-	}
-	// Parse the components specific to the requested page,
-	_, err = tmpl.ParseGlob("components/" + page + "/*.html")
-	if err != nil {
-		fmt.Println("Notice: The page doesn't have specific components.", page)
-	}
+		// Get the name of the template to be rendered
+		slugMap := loadJson.GetSlugMap()
+		page := slugMap[slug]
 
-	// Load the requested page's language data'
-	langs := loadJson.GetLangs()
-	langData, ok := langs[lang][page].(map[string]interface{})
-	if !ok {
-		http.Error(w, "Language or slug not found", http.StatusNotFound)
-		return
-	}
-	langData["lang"] = lang
-	langData["slug"] = slug
+		// Lookup the requested page
+		tmpl := tmpls.Lookup(page + ".html")
+		if tmpl == nil {
+			http.Error(w, "Page not found", http.StatusNotFound)
+			return
+		}
 
-	// Execute the template
-	err = tmpl.ExecuteTemplate(w, page, langData)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
+		// Load the requested page's language data'
+		langs := loadJson.GetLangs()
+		langData, ok := langs[lang][page].(map[string]interface{})
+		if !ok {
+			http.Error(w, "Language or slug not found", http.StatusNotFound)
+			return
+		}
+		langData["lang"] = lang
+		langData["slug"] = slug
+
+		// Execute the template
+		err := tmpl.ExecuteTemplate(w, page, langData)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
 }

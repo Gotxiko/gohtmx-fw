@@ -8,6 +8,7 @@
                 <a
                     class='{{if eq .slug "inicio"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
                     href="/{{.lang}}"
+                    hx-boost="true"
                     >Inicio</a
                 >
             </li>
@@ -15,6 +16,7 @@
                 <a
                     class='{{if eq .slug "about"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
                     href="/{{.lang}}/about"
+                    hx-boost="true"
                     >Sobre nosotros</a
                 >
             </li>
@@ -22,6 +24,7 @@
                 <a
                     class='{{if eq .slug "contact"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
                     href="/{{.lang}}/contact"
+                    hx-boost="true"
                     >Contacto</a
                 >
             </li>
