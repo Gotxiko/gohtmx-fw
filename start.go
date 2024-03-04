@@ -45,5 +45,5 @@ func main() {
 	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls))
 	r.HandleFunc("/", routes.WebsiteHandler(tmpls))
 
-	http.ListenAndServe(":3000", r)
+	http.ListenAndServe(":42069", r)
 }
