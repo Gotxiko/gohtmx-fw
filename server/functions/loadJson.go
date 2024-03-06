@@ -8,7 +8,6 @@ import (
 	"os"
 )
 
-
 type SlugMap map[string]string
 type Langs map[string]interface{}
 
@@ -31,7 +30,7 @@ func init() {
 			langs[lang] = langData
 		}
 	}
-	
+
 	loadSlugMap()
 }
 
@@ -64,18 +63,18 @@ func loadLangs(lang string) (Langs, error) {
 
 func loadSlugMap() {
 	jsonFile, err := os.Open("locales/slugToFileMap.json")
-    if err != nil {
-        panic(err)
-    }
-    defer jsonFile.Close()
+	if err != nil {
+		panic(err)
+	}
+	defer jsonFile.Close()
 
-    byteValue, err := io.ReadAll(jsonFile)
-    if err != nil {
-        panic(err)
-    }
+	byteValue, err := io.ReadAll(jsonFile)
+	if err != nil {
+		panic(err)
+	}
 
-    err = json.Unmarshal(byteValue, &slugMap)
-    if err != nil {
-        panic(err)
-    }
+	err = json.Unmarshal(byteValue, &slugMap)
+	if err != nil {
+		panic(err)
+	}
 }

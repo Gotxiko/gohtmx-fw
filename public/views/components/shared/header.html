@@ -1,34 +1,46 @@
-{{define "header"}}
-<header class="fixed flex w-full justify-center p-8 align-middle z-10">
-    <nav class="rounded-full p-4 backdrop-blur-sm">
-        <ul class="flex flex-row gap-4">
-            {{ $activeClasses := "rounded-full text-white bg-gray-800 px-8 py-3 font-semibold transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
-            {{ $commonClasses := "rounded-full px-8 py-3 font-semibold text-gray-800 transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
-            <li>
-                <a
-                    class='{{if eq .slug "inicio"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
-                    href="/{{.lang}}"
-                    hx-boost="true"
-                    >Inicio</a
-                >
-            </li>
-            <li>
-                <a
-                    class='{{if eq .slug "about"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
-                    href="/{{.lang}}/about"
-                    hx-boost="true"
-                    >Sobre nosotros</a
-                >
-            </li>
-            <li>
-                <a
-                    class='{{if eq .slug "contact"}}{{$activeClasses}}{{else}}{{$commonClasses}}{{end}}'
-                    href="/{{.lang}}/contact"
-                    hx-boost="true"
-                    >Contacto</a
-                >
-            </li>
-        </ul>
-    </nav>
-</header>
-{{end}}
+{{ define "header" }}
+    <header class="fixed z-10 flex w-full justify-center p-8 align-middle">
+        <nav class="rounded-full p-4 backdrop-blur-sm">
+            <ul class="flex flex-row gap-4">
+                {{ $activeClasses := "rounded-full text-white bg-gray-800 px-8 py-3 font-semibold transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
+                {{ $commonClasses := "rounded-full px-8 py-3 font-semibold text-gray-800 transition-all ease-in-out hover:bg-gray-800 hover:text-white" }}
+                <li>
+                    <a
+                        class="{{ if eq .slug "inicio" }}
+                            {{ $activeClasses }}
+                        {{ else }}
+                            {{ $commonClasses }}
+                        {{ end }}"
+                        href="/{{ .lang }}"
+                        hx-boost="true">
+                        Inicio
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="{{ if eq .slug "about" }}
+                            {{ $activeClasses }}
+                        {{ else }}
+                            {{ $commonClasses }}
+                        {{ end }}"
+                        href="/{{ .lang }}/about"
+                        hx-boost="true">
+                        Sobre nosotros
+                    </a>
+                </li>
+                <li>
+                    <a
+                        class="{{ if eq .slug "contact" }}
+                            {{ $activeClasses }}
+                        {{ else }}
+                            {{ $commonClasses }}
+                        {{ end }}"
+                        href="/{{ .lang }}/contact"
+                        hx-boost="true">
+                        Contacto
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+{{ end }}

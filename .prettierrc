@@ -2,7 +2,17 @@
     "semi": true,
     "trailingComma": "all",
     "singleQuote": true,
-    "printWidth": 80,
+    "printWidth": 120,
     "tabWidth": 4,
-    "plugins": ["prettier-plugin-tailwindcss"]
+    "bracketSameLine": true,
+    "htmlWhitespaceSensitivity": "ignore",
+    "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-go-template"],
+    "overrides": [
+        {
+            "files": ["*.html"],
+            "options": {
+                "parser": "go-template"
+            }
+        }
+    ]
 }
