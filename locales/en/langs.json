@@ -1,8 +1,11 @@
 {
     "index": {
-        "title": "Home"
+        "title": "Inicio"
     },
-    "partial": {
+    "home": {
         "text": "HTMX!"
+    },
+    "portfolio": {
+        "title": "Portafolio"
     }
 }

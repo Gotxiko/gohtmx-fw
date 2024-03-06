@@ -40,7 +40,6 @@ func PartialsHandler(w http.ResponseWriter, r *http.Request) {
 
 	langs := loadJson.GetLangs()
 	langData, ok := langs[preferredLang][name].(map[string]interface{})
-
 	if !ok {
 		http.Error(w, "Language or slug not found", http.StatusNotFound)
 		return
