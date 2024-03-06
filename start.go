@@ -36,7 +36,7 @@ func main() {
 
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
-	//
+
 	// Handle partials
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler)
 

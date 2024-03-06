@@ -8,8 +8,8 @@
     </head>
 
     <body class="bg-gray-200">
-        <!-- {{ template "header" . }} -->
-        <div class="block">
+        {{ template "header" . }}
+        <div class="relative block min-h-96 w-full">
             <button
                 hx-get="partial/partial"
                 class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
