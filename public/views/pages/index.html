@@ -3,13 +3,13 @@
 <html lang="{{.lang}}">
     <head>
         <title>{{ .title }}</title>
-        <link rel="stylesheet" href="/assets/css/app.css" />
-        <script src="/assets/js/app.js"></script>
+        <link rel="stylesheet" href="/assets/styles.css" />
+        <script src="/assets/scripts.js"></script>
     </head>
 
     <body class="bg-gray-200">
-        {{ template "header" . }}
-        <div class="relative block min-h-96 w-full">
+        <!-- {{ template "header" . }} -->
+        <div class="relative block min-h-96 w-full z-0 pt-32">
             <button
                 hx-get="partial/partial"
                 class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"

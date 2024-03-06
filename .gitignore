@@ -13,3 +13,4 @@ supervisord.pid
 start
 gtz-main
 gtz-app
+tmp
