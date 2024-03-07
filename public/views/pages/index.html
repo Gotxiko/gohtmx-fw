@@ -23,12 +23,14 @@
                                 {{ .about_description }}
                             </p>
                             <p class="flex w-fit flex-row gap-2 text-xs font-extralight text-black">
-                                <a class="block grow-line" href="{{ .mailme_link }}">
+                                <a class="relative flex grow-line flex-row gap-2" href="{{ .mailme_link }}">
                                     {{ .mailme }}
+                                    <span class="icon icon--arrow-up-right block"></span>
                                 </a>
                                 |
-                                <a class="block grow-line" href="{{ .github_link }}">
+                                <a class="relative flex grow-line flex-row gap-2" href="{{ .github_link }}">
                                     {{ .github }}
+                                    <span class="icon icon--arrow-up-right block"></span>
                                 </a>
                             </p>
                         </div>

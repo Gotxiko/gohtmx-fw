@@ -1,5 +1,7 @@
-
-.grow-line span:last-child::after,
+a.grow-line {
+    position: relative;
+}
+button.grow-line span:last-child::after,
 a.grow-line::after {
     content: '';
     display: block;
@@ -8,7 +10,13 @@ a.grow-line::after {
     background: black;
     transition: width 0.3s ease-in-out;
 }
-.grow-line:hover span:last-child::after,
+button.grow-line:hover span:last-child::after {
+    width: 100%;
+}
+a.grow-line::after {
+    position: absolute;
+    bottom: -4px;
+}
 a.grow-line:hover::after {
     width: 100%;
 }

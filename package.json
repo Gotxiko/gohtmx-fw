@@ -5,9 +5,10 @@
     "type": "module",
     "scripts": {
         "format": "prettier --write . && gofmt -w .",
+        "build:assets": "cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
         "build:css": "npx @tailwindcss/cli@next -i src/assets/css/app.css -o dist/assets/styles.css",
         "build:js": "esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify ",
-        "build": "npm run build:css && npm run build:js",
+        "build": "npm run build:css && npm run build:js && npm run build:assets",
         "start": "pm2 start gtz-app --name www",
         "build:start": "npm run build && go build -o gtz-app server/start.go && npm run start",
         "build:restart": "npm run build && go build -o gtz-app server/start.go && pm2 restart www",

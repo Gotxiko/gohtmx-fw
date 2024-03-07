@@ -4,6 +4,7 @@
 @import 'typography/typography.css';
 
 @import 'utils/viewTransitions.css';
+@import 'utils/svg.css';
 
 @theme {
     --font-family-akkurat: 'AkkuratMono-Regular';
