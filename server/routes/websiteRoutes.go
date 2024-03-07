@@ -15,14 +15,14 @@ func WebsiteHandler(tmpls *template.Template) func(w http.ResponseWriter, r *htt
 		slug, slugExists := vars["slug"]
 
 		if !langExists {
-			lang = "es"
+			lang = "en"
 		}
 
 		if !slugExists {
-			if lang == "es" {
-				slug = "inicio"
-			} else {
+			if lang == "en" {
 				slug = "home"
+			} else {
+				slug = "inicio"
 			}
 		}
 
