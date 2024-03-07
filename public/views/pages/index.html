@@ -8,7 +8,7 @@
         </head>
 
         <body
-            class="h-screen w-full overflow-hidden p-4 font-akkurat"
+            class="font-akkurat h-screen w-full overflow-hidden p-4"
             style="border-color: hsla(0, 0%, 95%, .5); user-select: none;"
         >
             <div class="flex h-1/2 flex-row border p-8" style="border-color: hsla(0, 0%, 5%, 0.5)">
@@ -18,13 +18,17 @@
                             <h1 class="text-4xl font-extralight text-black">{{ .name }}</h1>
                             <p class="text-base font-extralight text-black">{{ .jobtitle }}</p>
                         </div>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-4">
                             <p class="text-balance text-xs font-extralight text-black">
                                 {{ .about_description }}
                             </p>
-                            <p class="w-fit text-xs font-extralight text-black">
-                                <a class="block grow-line" href="mailto:gotzonalava@icloud.com">
+                            <p class="flex w-fit flex-row gap-2 text-xs font-extralight text-black">
+                                <a class="block grow-line" href="{{ .mailme_link }}">
                                     {{ .mailme }}
+                                </a>
+                                |
+                                <a class="block grow-line" href="{{ .github_link }}">
+                                    {{ .github }}
                                 </a>
                             </p>
                         </div>
@@ -35,24 +39,19 @@
             <div class="h-50 z-10 flex flex-row p-2">
                 <div class="w-full">
                     <div class="flex w-full flex-row justify-start gap-6">
-                        <button
-                            hx-get="/partial/home"
-                            hx-target="#hx-block"
-                            hx-swap="innerHTML transition:true"
-                            class="active flex grow-line cursor-pointer flex-row items-center gap-2 text-base font-extralight text-black"
-                        >
-                            <span class="block h-3 w-3 border border-black bg-black"></span>
-                            <span class="block">{{ .navigation.home }}</span>
-                        </button>
-                        <button
-                            hx-get="/partial/portfolio"
-                            hx-target="#hx-block"
-                            hx-swap="innerHTML transition:true"
-                            class="flex grow-line cursor-pointer flex-row items-center gap-2 text-base font-extralight text-black"
-                        >
-                            <span class="block h-3 w-3 border border-black"></span>
-                            <span class="block">{{ .navigation.portfolio }}</span>
-                        </button>
+                        {{ range $index, $element := .navigation }}
+                            <button
+                                hx-get="/partial/{{ $element.link }}"
+                                hx-target="#hx-block"
+                                hx-swap="innerHTML transition:true"
+                                class="{{ if eq $index 0 }}
+                                    active
+                                {{ end }} flex grow-line cursor-pointer flex-row items-center gap-2 text-sm font-extralight text-black"
+                            >
+                                <span class="{{ if eq $index 0 }}bg-black{{ end }} block h-3 w-3 border"></span>
+                                <span class="relative top-[2px] block">{{ $element.name }}</span>
+                            </button>
+                        {{ end }}
                     </div>
                 </div>
             </div>

@@ -1,17 +1,24 @@
 {
     "index": {
         "title": "Gotzon Álava",
-        "name": "Gotzon Álava",
+        "name": "Test Surname",
         "jobtitle": "Fullstack Developer",
         "about_description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges.",
         "mailme": "Send me an email",
-        "navigation": {
-            "home": "Home",
-            "portfolio": "Portfolio"
-        }
+        "mailme_link": "mailto:gotzonalava@icloud.com",
+        "github": "Github",
+        "github_link": "https://github.com/Gotxiko",
+        "navigation": [
+            {
+                "name": "Home",
+                "link": "home"
+            },
+            {
+                "name": "Portfolio",
+                "link": "portfolio"
+            }
+        ]
     },
-    "home": {
-    },
-    "portfolio": {
-    }
+    "home": {},
+    "portfolio": {}
 }
