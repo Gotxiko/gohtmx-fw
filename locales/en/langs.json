@@ -1,11 +1,17 @@
 {
     "index": {
-        "title": "Inicio"
+        "title": "Gotzon Álava",
+        "name": "Gotzon Álava",
+        "jobtitle": "Fullstack Developer",
+        "about_description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges.",
+        "mailme": "Send me an email",
+        "navigation": {
+            "home": "Home",
+            "portfolio": "Portfolio"
+        }
     },
     "home": {
-        "text": "HTMX!"
     },
     "portfolio": {
-        "title": "Portafolio"
     }
 }

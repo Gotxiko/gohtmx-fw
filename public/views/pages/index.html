@@ -15,17 +15,16 @@
                 <div class="flex h-full w-full flex-row">
                     <div class="flex w-1/2 flex-col justify-between">
                         <div class="">
-                            <h1 class="text-4xl font-extralight text-black">Gotzon Álava</h1>
-                            <p class="text-base font-extralight text-black">Fullstack Developer</p>
+                            <h1 class="text-4xl font-extralight text-black">{{ .name }}</h1>
+                            <p class="text-base font-extralight text-black">{{ .jobtitle }}</p>
                         </div>
                         <div class="flex flex-col gap-2">
                             <p class="text-balance text-xs font-extralight text-black">
-                                Fullstack developer with a passion for creating beautiful and functional applications
-                                and always looking for new challenges.
+                                {{ .about_description }}
                             </p>
                             <p class="w-fit text-xs font-extralight text-black">
                                 <a class="block grow-line" href="mailto:gotzonalava@icloud.com">
-                                    gotzonalava@icloud.com
+                                    {{ .mailme }}
                                 </a>
                             </p>
                         </div>
@@ -43,7 +42,7 @@
                             class="active flex grow-line cursor-pointer flex-row items-center gap-2 text-base font-extralight text-black"
                         >
                             <span class="block h-3 w-3 border border-black bg-black"></span>
-                            <span class="block">Home</span>
+                            <span class="block">{{ .navigation.home }}</span>
                         </button>
                         <button
                             hx-get="/partial/portfolio"
@@ -52,7 +51,7 @@
                             class="flex grow-line cursor-pointer flex-row items-center gap-2 text-base font-extralight text-black"
                         >
                             <span class="block h-3 w-3 border border-black"></span>
-                            <span class="block">Portfolio</span>
+                            <span class="block">{{ .navigation.portfolio }}</span>
                         </button>
                     </div>
                 </div>
