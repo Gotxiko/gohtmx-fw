@@ -6,9 +6,14 @@
     "scripts": {
         "format": "prettier --write . && gofmt -w .",
         "build:assets": "cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
-        "build:css": "npx @tailwindcss/cli@next -i src/assets/css/app.css | npx clean-css-cli -o dist/assets/styles.css",
+        "build:css": "npx tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css",
         "build:js": "esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify ",
         "build": "npm run build:css && npm run build:js && npm run build:assets",
+        "start:air": "~/go/bin/air",
+        "watch:css": "npx tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css --watch",
+        "watch:js": "esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify --watch",
+        "watch": "npm-run-all --parallel watch:css watch:js start:air",
+        "start:go": "realize start",
         "start": "pm2 start gtz-app --name www",
         "build:start": "npm run build && go build -o gtz-app server/start.go && npm run start",
         "build:restart": "npm run build && go build -o gtz-app server/start.go && pm2 restart www",
@@ -24,10 +29,11 @@
         "vanilla-cookieconsent": "^3.0.0"
     },
     "devDependencies": {
-        "@tailwindcss/cli": "^4.0.0-alpha.5",
+        "@tailwindcss/cli": "^4.0.0-alpha.6",
         "buffer": "^6.0.3",
         "clean-css-cli": "^5.6.3",
         "esbuild": "0.20.1",
+        "npm-run-all": "^4.1.5",
         "postcss-import": "^16.0.1",
         "prettier": "^3.2.5",
         "prettier-plugin-go-template": "^0.0.15",
@@ -36,6 +42,6 @@
         "sharp": "^0.33.2",
         "style-loader": "^3.3.4",
         "svgo": "^3.2.0",
-        "tailwindcss": "^4.0.0-alpha.5"
+        "tailwindcss": "^4.0.0-alpha.6"
     }
 }
