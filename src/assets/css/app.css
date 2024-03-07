@@ -9,3 +9,7 @@
 @theme {
     --font-family-akkurat: 'AkkuratMono-Regular';
 }
+
+.text-shadow {
+    text-shadow: 0 0 10px white;
+}

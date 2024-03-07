@@ -6,7 +6,7 @@
     "scripts": {
         "format": "prettier --write . && gofmt -w .",
         "build:assets": "cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
-        "build:css": "npx @tailwindcss/cli@next -i src/assets/css/app.css -o dist/assets/styles.css",
+        "build:css": "npx @tailwindcss/cli@next -i src/assets/css/app.css | npx clean-css-cli -o dist/assets/styles.css",
         "build:js": "esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify ",
         "build": "npm run build:css && npm run build:js && npm run build:assets",
         "start": "pm2 start gtz-app --name www",
@@ -26,6 +26,7 @@
     "devDependencies": {
         "@tailwindcss/cli": "^4.0.0-alpha.5",
         "buffer": "^6.0.3",
+        "clean-css-cli": "^5.6.3",
         "esbuild": "0.20.1",
         "postcss-import": "^16.0.1",
         "prettier": "^3.2.5",

@@ -2,24 +2,27 @@
     <!doctype html>
     <html lang="{{ .lang }}">
         <head>
-            <title>{{ .title }}</title>
+            <title>{{ .meta.title }}</title>
             <link rel="stylesheet" href="/assets/styles.css" />
-            <script src="/assets/scripts.js"></script>
+            <meta charset="utf-8" />
+            <meta name="description" content="{{ .meta.description }}" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         </head>
 
         <body
-            class="font-akkurat h-screen w-full overflow-hidden p-4"
+            class="font-akkurat h-dvh w-full overflow-hidden p-4"
             style="border-color: hsla(0, 0%, 95%, .5); user-select: none;"
         >
-            <div class="flex h-1/2 flex-row border p-8" style="border-color: hsla(0, 0%, 5%, 0.5)">
-                <div class="flex h-full w-full flex-row">
-                    <div class="flex w-1/2 flex-col justify-between">
-                        <div class="">
-                            <h1 class="text-4xl font-extralight text-black">{{ .name }}</h1>
-                            <p class="text-base font-extralight text-black">{{ .jobtitle }}</p>
+            <div class="relative z-10 flex h-full flex-row border sm:h-1/2" style="border-color: hsla(0, 0%, 5%, 0.5)">
+                <div id="bg" class="absolute h-full w-full overflow-hidden opacity-50"></div>
+                <div class="z-20 flex h-full w-full flex-row p-8">
+                    <div class="z-10 flex w-full flex-col justify-between sm:w-1/2">
+                        <div class="flex flex-col">
+                            <h1 class="text-shadow text-4xl font-extralight text-black">{{ .name }}</h1>
+                            <p class="text-shadow text-base font-extralight text-black">{{ .jobtitle }}</p>
                         </div>
                         <div class="flex flex-col gap-4">
-                            <p class="text-balance text-xs font-extralight text-black">
+                            <p class="text-balance pr-14 text-xs font-extralight text-black">
                                 {{ .about_description }}
                             </p>
                             <p class="flex w-fit flex-row gap-2 text-xs font-extralight text-black">
@@ -43,17 +46,20 @@
                             </p>
                         </div>
                     </div>
-                    <div id="hx-block" class="hx-inner-animate h-full w-1/2"></div>
+                    <div
+                        id="hx-block"
+                        class="hx-inner-animate absolute top-0 left-0 z-0 h-full w-full sm:relative sm:w-1/2"
+                    ></div>
                 </div>
             </div>
-            <div class="h-50 z-10 flex flex-row p-2">
+            <div class="h-50 z-10 flex hidden flex-row p-2 sm:block">
                 <div class="w-full">
                     <div class="flex w-full flex-row justify-start gap-6">
                         {{ range $index, $element := .navigation }}
                             <button
                                 hx-get="/partial/{{ $element.link }}"
                                 hx-target="#hx-block"
-                                hx-swap="innerHTML transition:true"
+                                hx-swap="outerHTML transition:true"
                                 class="{{ if eq $index 0 }}
                                     active
                                 {{ end }} flex grow-line cursor-pointer flex-row items-center gap-2 text-sm font-extralight text-black"
@@ -65,6 +71,8 @@
                     </div>
                 </div>
             </div>
+            <footer></footer>
+            <script defer src="/assets/scripts.js"></script>
         </body>
     </html>
 {{ end }}

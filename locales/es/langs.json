@@ -1,6 +1,9 @@
 {
     "index": {
-        "title": "Gotzon Álava",
+        "meta": {
+            "title": "Gotzon Álava",
+            "description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges."
+        },
         "name": "Gotzon Álava",
         "jobtitle": "Fullstack Developer",
         "about_description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges.",
@@ -20,5 +23,18 @@
         ]
     },
     "home": {},
-    "portfolio": {}
+    "portfolio": {
+        "projects": [
+            {
+                "title": "Kutxabank",
+                "company": "Zorraquino",
+                "img": "https://www.brandemia.org/wp-content/uploads/2011/12/logo_principal_kutxabank1.jpg"
+            },
+            {
+                "title": "IMQ Prevención",
+                "company": "Zorraquino",
+                "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg"
+            }
+        ]
+    }
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gtz-main/server/middleware"
 	"gtz-main/server/routes"
 	"html/template"
 	"net/http"
@@ -33,6 +34,9 @@ func main() {
 	}
 
 	r := mux.NewRouter()
+
+	// Handle gzip compression
+	r.Use(middleware.GzipMiddleware)
 
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
