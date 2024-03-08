@@ -25,7 +25,7 @@
                     class="absolute h-full w-full overflow-hidden opacity-50"
                 ></div>
                 <div
-                    class="bg_pattern absolute z-30 h-full w-full overflow-hidden opacity-50"
+                    class="bg_pattern absolute z-20 h-full w-full overflow-hidden opacity-50"
                 ></div>
                 <div class="z-20 flex h-full w-full flex-row p-8">
                     <div
@@ -33,24 +33,24 @@
                     >
                         <div class="flex flex-col">
                             <h1
-                                class="text-shadow text-4xl font-extralight text-black"
+                                class="text-move text-shadow text-4xl font-extralight text-black"
                             >
                                 {{ .name }}
                             </h1>
                             <p
-                                class="text-shadow text-base font-extralight text-black"
+                                class="text-move text-shadow text-base font-extralight text-black"
                             >
                                 {{ .jobtitle }}
                             </p>
                         </div>
                         <div class="flex flex-col gap-4">
                             <p
-                                class="text-balance pr-14 text-xs font-extralight text-black"
+                                class="text-move text-balance pr-14 text-xs font-extralight text-black"
                             >
                                 {{ .about_description }}test
                             </p>
                             <p
-                                class="flex w-fit flex-row gap-2 text-xs font-extralight text-black"
+                                class="text-move flex w-fit flex-row gap-2 text-xs font-extralight text-black"
                             >
                                 <a
                                     class="relative flex grow-line flex-row items-center gap-2"
@@ -82,7 +82,7 @@
                     ></div>
                 </div>
             </div>
-            <div class="h-50 z-10 flex hidden flex-row p-2 sm:block">
+            <div class="h-50 z-40 flex hidden flex-row p-2 sm:block">
                 <div class="w-full">
                     <div class="flex w-full flex-row justify-start gap-6">
                         {{ range $index, $element := .navigation }}

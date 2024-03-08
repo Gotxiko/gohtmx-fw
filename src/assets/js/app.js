@@ -31,6 +31,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const text = document.querySelectorAll('.text-move'),
+        root = document.documentElement;
+    text.forEach((t) => {
+        root.addEventListener('mousemove', (e) => {
+            const x = e.clientX,
+                y = e.clientY;
+            t.style.transform = `translate(${-x / 100}px,${-y / 100}px)`;
+        });
+    });
+
     document.addEventListener('htmx:load', (event) => {
         document.querySelectorAll('.project').forEach((project) => {
             project.addEventListener('mouseover', (e) => {
@@ -43,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
             project.addEventListener('mouseout', (e) => {
                 let id = e.target.dataset.index;
                 let project = document.querySelector(`#proj--${id}`);
-                console.log(project);
                 if (project) {
                     project.classList.add('opacity-0');
                 }
