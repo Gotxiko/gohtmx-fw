@@ -15,9 +15,11 @@ This project aims to be a framework for creating simple multilanguage websites u
 │       └── js
 │
 ├── locales
-├── pages
-├── partials
-│
+├── public
+│   ├── components
+│   ├── pages
+|   └── partials
+|
 └── server
     ├── middleware
     ├── routes
@@ -27,21 +29,21 @@ This project aims to be a framework for creating simple multilanguage websites u
 
 ### dist
 
-dist holds the compiled files. The .scss and .js files are compiled into the dist folder. It also holds the optimized images.
+dist holds the compiled files. The .css and .js files are bundled into the dist folder. It also holds the images.
 
 ### src
 
-src holds the source files. The .scss, .js and images are located here. The .scss files are the styles and the .js files are the scripts. Images are located in the img folder.
+src holds the source files. The .css, .js and images are located here.
 
 ### locales
 
 locales holds the translations. Each language has its own folder, and inside it, a .json file with all the contents. The .json file holds a key per page/partial. Use the names of the html files for the keys, not the route/slug/name used to access it.
 
-For new pages, add to locales/slugToFileMap.json the routes we want to be accessible to the user. Key is the slug/route, its value the filename of the HTML to load.
+For new pages, add to locales/slugToFileMap.json the routes we want to be accessible to the user. Key is the slug/route, its value is the filename of the HTML to load.
 
 ### server
 
-Holds all the files that pertain to the SSR of the site. All in Go, using mux for routing.
+Holds all the files that pertain to the SSR of the site. Developed in Go Lang, using mux for routing.
 
 ## Getting Started
 
@@ -59,13 +61,13 @@ npm install
 npm run build
 ```
 
-These commands will compile the .scss and .js files, and optimize the images. All will be placed in the dist folder. all does bundle+images.
-The .scss contains TailwindCSS utility classes, and when building, it will scan the ejs files to compile only the necessary classes.
+These commands will bundle the .css and .js files, and copy the images. All will be placed in the dist folder.
+The .css contains TailwindCSS, when building, it will automatically scan the project in search of classes.
 
 To build the Go application:
 
 ```bash
-go build -o gtz-app start.go
+go build -o gtz-app server/start.go
 ```
 
 ## Watching for Changes
@@ -74,7 +76,19 @@ go build -o gtz-app start.go
 npm run watch
 ```
 
-This will watch for changes in the .scss and .js files.
+This will watch for changes in the entire project. It uses air to watch for changes and perform an npm run build along with a go application restart. Configuration is in .air.toml
+
+## Prettier
+
+It is very important to format all the documents before committing. Prettier will properly indent the code, and reorder the tailwind classes in the html files.
+
+You can do so with the following command:
+
+```bash
+npm run format
+```
+
+It is also recommended to enable format on save in your IDE and have it use the config from .prettierrc
 
 ## Starting the Server with PM2
 
