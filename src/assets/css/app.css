@@ -13,3 +13,11 @@
 .text-shadow {
     text-shadow: 0 0 10px white;
 }
+
+.bg_pattern {
+    background-image: url('/assets/svg/grid_bg.svg');
+    background-repeat: repeat;
+    background-size: 42px 42px;
+    opacity: 0.05;
+    pointer-events: none;
+}

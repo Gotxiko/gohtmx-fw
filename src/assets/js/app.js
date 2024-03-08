@@ -17,10 +17,37 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('button').forEach((button) => {
         button.addEventListener('click', (e) => {
             document.querySelectorAll('button').forEach((button) => {
-                button.querySelector('span:first-child').classList.remove('bg-black');
+                button
+                    .querySelector('span:first-child')
+                    .classList.remove('bg-black');
             });
-            let targetElement = e.target.tagName.toLowerCase() === 'button' ? e.target : e.target.parentElement;
-            targetElement.querySelector('span:first-child').classList.add('bg-black');
+            let targetElement =
+                e.target.tagName.toLowerCase() === 'button'
+                    ? e.target
+                    : e.target.parentElement;
+            targetElement
+                .querySelector('span:first-child')
+                .classList.add('bg-black');
+        });
+    });
+
+    document.addEventListener('htmx:load', (event) => {
+        document.querySelectorAll('.project').forEach((project) => {
+            project.addEventListener('mouseover', (e) => {
+                let id = e.target.dataset.index;
+                let project = document.querySelector(`#proj--${id}`);
+                if (project) {
+                    project.classList.remove('opacity-0');
+                }
+            });
+            project.addEventListener('mouseout', (e) => {
+                let id = e.target.dataset.index;
+                let project = document.querySelector(`#proj--${id}`);
+                console.log(project);
+                if (project) {
+                    project.classList.add('opacity-0');
+                }
+            });
         });
     });
 });

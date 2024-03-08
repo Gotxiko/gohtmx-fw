@@ -28,12 +28,14 @@
             {
                 "title": "Kutxabank",
                 "company": "Zorraquino",
-                "img": "https://www.brandemia.org/wp-content/uploads/2011/12/logo_principal_kutxabank1.jpg"
+                "img": "https://www.brandemia.org/wp-content/uploads/2011/12/logo_principal_kutxabank1.jpg",
+                "bg_img": "/assets/img/kutxabank_bg.png"
             },
             {
                 "title": "IMQ Prevención",
                 "company": "Zorraquino",
-                "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg"
+                "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg",
+                "bg_img": "/assets/img/imq_bg.jpg"
             }
         ]
     }

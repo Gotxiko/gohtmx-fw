@@ -6,33 +6,61 @@
             <link rel="stylesheet" href="/assets/styles.css" />
             <meta charset="utf-8" />
             <meta name="description" content="{{ .meta.description }}" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+            />
         </head>
 
         <body
             class="font-akkurat h-dvh w-full overflow-hidden p-4"
             style="border-color: hsla(0, 0%, 95%, .5); user-select: none;"
         >
-            <div class="relative z-10 flex h-full flex-row border sm:h-1/2" style="border-color: hsla(0, 0%, 5%, 0.5)">
-                <div id="bg" class="absolute h-full w-full overflow-hidden opacity-50"></div>
+            <div
+                class="relative z-10 flex h-full flex-row border sm:h-1/2"
+                style="border-color: hsla(0, 0%, 5%, 0.5)"
+            >
+                <div
+                    id="bg"
+                    class="absolute h-full w-full overflow-hidden opacity-50"
+                ></div>
+                <div
+                    class="bg_pattern absolute z-30 h-full w-full overflow-hidden opacity-50"
+                ></div>
                 <div class="z-20 flex h-full w-full flex-row p-8">
-                    <div class="z-10 flex w-full flex-col justify-between sm:w-1/2">
+                    <div
+                        class="z-10 flex w-full flex-col justify-between sm:w-1/2"
+                    >
                         <div class="flex flex-col">
-                            <h1 class="text-shadow text-4xl font-extralight text-black">{{ .name }}</h1>
-                            <p class="text-shadow text-base font-extralight text-black">{{ .jobtitle }}</p>
+                            <h1
+                                class="text-shadow text-4xl font-extralight text-black"
+                            >
+                                {{ .name }}
+                            </h1>
+                            <p
+                                class="text-shadow text-base font-extralight text-black"
+                            >
+                                {{ .jobtitle }}
+                            </p>
                         </div>
                         <div class="flex flex-col gap-4">
-                            <p class="text-balance pr-14 text-xs font-extralight text-black">
+                            <p
+                                class="text-balance pr-14 text-xs font-extralight text-black"
+                            >
                                 {{ .about_description }}test
                             </p>
-                            <p class="flex w-fit flex-row gap-2 text-xs font-extralight text-black">
+                            <p
+                                class="flex w-fit flex-row gap-2 text-xs font-extralight text-black"
+                            >
                                 <a
                                     class="relative flex grow-line flex-row items-center gap-2"
                                     href="{{ .mailme_link }}"
                                     target="_blank"
                                 >
                                     {{ .mailme }}
-                                    <span class="icon icon--arrow-up-right block"></span>
+                                    <span
+                                        class="icon icon--arrow-up-right block"
+                                    ></span>
                                 </a>
                                 |
                                 <a
@@ -41,7 +69,9 @@
                                     target="_blank"
                                 >
                                     {{ .github }}
-                                    <span class="icon icon--arrow-up-right block"></span>
+                                    <span
+                                        class="icon icon--arrow-up-right block"
+                                    ></span>
                                 </a>
                             </p>
                         </div>
@@ -64,8 +94,14 @@
                                     active
                                 {{ end }} flex grow-line cursor-pointer flex-row items-center gap-2 text-sm font-extralight text-black"
                             >
-                                <span class="{{ if eq $index 0 }}bg-black{{ end }} block h-3 w-3 border"></span>
-                                <span class="relative top-[2px] block">{{ $element.name }}</span>
+                                <span
+                                    class="{{ if eq $index 0 }}
+                                        bg-black
+                                    {{ end }} block h-3 w-3 border"
+                                ></span>
+                                <span class="relative top-[2px] block">
+                                    {{ $element.name }}
+                                </span>
                             </button>
                         {{ end }}
                     </div>
