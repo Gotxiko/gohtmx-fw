@@ -1,6 +1,6 @@
 {{ define "index" }}
     <!doctype html>
-    <html lang="{{ .lang }}">
+    <html lang="{{ .lang }}" hx-headers='{"Accept-Language": "{{ .lang }}"}'>
         <head>
             <title>{{ .meta.title }}</title>
             <link rel="stylesheet" href="/assets/styles.css" />
@@ -47,7 +47,7 @@
                             <p
                                 class="text-move text-balance pr-14 text-xs font-extralight text-black"
                             >
-                                {{ .about_description }}test
+                                {{ .about_description }}
                             </p>
                             <p
                                 class="text-move flex w-fit flex-row gap-2 text-xs font-extralight text-black"

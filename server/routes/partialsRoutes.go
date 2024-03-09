@@ -5,8 +5,6 @@ import (
 	"html/template"
 	"net/http"
 	"path/filepath"
-	"strconv"
-	"strings"
 
 	"github.com/gorilla/mux"
 )
@@ -19,24 +17,7 @@ func PartialsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	header := r.Header.Get("Accept-Language")
-	tags := strings.Split(header, ",")
-	highestQ := 0.0
-	preferredLang := ""
-
-	for _, lang := range tags {
-		parts := strings.Split(lang, ";q=")
-		if len(parts) == 2 {
-			q, err := strconv.ParseFloat(parts[1], 64)
-			if err == nil && q > highestQ {
-				highestQ = q
-				preferredLang = strings.Split(parts[0], "-")[0]
-			}
-		} else {
-			preferredLang = strings.Split(parts[0], "-")[0]
-			break
-		}
-	}
+	preferredLang := r.Header.Get("Accept-Language")
 
 	langs := loadJson.GetLangs()
 	langData, ok := langs[preferredLang][name].(map[string]interface{})

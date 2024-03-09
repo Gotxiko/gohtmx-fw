@@ -32,17 +32,20 @@
             {
                 "title": "Kutxabank",
                 "company_logo": "Zorraquino",
+                "url": "https://clientes.kutxabank.es",
                 "img": "https://www.brandemia.org/wp-content/uploads/2011/12/logo_principal_kutxabank1.jpg"
             },
             {
                 "title": "IMQ Prevención",
                 "company_logo": "Zorraquino",
+                "url": "https://imqprevencion.es",
                 "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg",
                 "bg_img": "/assets/img/imq_bg.jpg"
             },
             {
                 "title": "Keinuak",
                 "company": "Freelance",
+                "url": "https://keinuak.eus",
                 "img": "https://keinuak.eus/wp-content/uploads/2020/06/LOGO.png"
             }
         ]
