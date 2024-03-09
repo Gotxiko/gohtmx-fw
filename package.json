@@ -14,8 +14,8 @@
         "watch": "bun run start:air",
         "start:go": "realize start",
         "start": "pm2 start gtz-app --name www",
-        "build:start": "bun run build && go build -o gtz-app server/start.go && bun run start",
-        "build:restart": "bun run build && go build -o gtz-app server/start.go && pm2 restart www",
+        "build:start": "bun run build && go build -o gtz-app server/server.go && bun run start",
+        "build:restart": "bun run build && go build -o gtz-app server/server.go && pm2 restart www",
         "restart": "pm2 restart www",
         "delete-all": "pm2 delete all"
     },
