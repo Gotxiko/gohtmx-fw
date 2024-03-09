@@ -9,7 +9,6 @@
         "build:css": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css",
         "build:js": "esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify",
         "build": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css && esbuild src/assets/js/app.js --outfile=dist/assets/scripts.js --bundle --minify && cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
-        "build2": "bun run build:css && bun run build:js && bun run build:assets",
         "start:air": "~/go/bin/air",
         "watch": "bun run start:air",
         "start:go": "realize start",
