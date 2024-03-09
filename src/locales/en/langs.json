@@ -4,13 +4,15 @@
             "title": "Gotzon Álava",
             "description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges."
         },
-        "name": "Gotzon Álava",
-        "jobtitle": "Fullstack Developer",
-        "about_description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges.",
-        "mailme": "Send me an email",
-        "mailme_link": "mailto:gotzonalava@icloud.com",
-        "github": "Github",
-        "github_link": "https://github.com/Gotxiko",
+        "hero": {
+            "name": "Gotzon Álava",
+            "jobtitle": "Fullstack Developer",
+            "about_description": "Fullstack developer with a passion for creating beautiful and functional applications and always looking for new challenges.",
+            "mailme": "Send me an email",
+            "mailme_link": "mailto:gotzonalava@icloud.com",
+            "github": "Github",
+            "github_link": "https://github.com/Gotxiko"
+        },
         "navigation": [
             {
                 "name": "Home",

@@ -1,17 +1,7 @@
 {{ define "index" }}
     <!doctype html>
     <html lang="{{ .lang }}" hx-headers='{"Accept-Language": "{{ .lang }}"}'>
-        <head>
-            <title>{{ .meta.title }}</title>
-            <link rel="stylesheet" href="/assets/styles.css" />
-            <meta charset="utf-8" />
-            <meta name="description" content="{{ .meta.description }}" />
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
-        </head>
-
+        {{ template "Head" .meta }}
         <body
             class="font-akkurat h-dvh w-full overflow-hidden p-4"
             style="border-color: hsla(0, 0%, 95%, .5); user-select: none;"
@@ -20,22 +10,9 @@
                 class="relative z-10 flex h-full flex-row border sm:h-1/2"
                 style="border-color: hsla(0, 0%, 5%, 0.5)"
             >
-                <div
-                    id="bg"
-                    class="absolute h-full w-full overflow-hidden opacity-50"
-                ></div>
-                <div
-                    class="bg_pattern absolute z-20 h-full w-full overflow-hidden opacity-50"
-                ></div>
-                <div class="z-20 flex h-full w-full flex-row p-8">
-                    {{ template "HeroContent" . }}
-                    <div
-                        id="hx-block"
-                        class="hx-inner-animate absolute top-0 left-0 z-0 h-full w-full sm:relative sm:w-1/2"
-                    ></div>
-                </div>
+                {{ template "HeroSection" .hero }}
             </div>
-            {{ template "Navigation" . }}
+            {{ template "Navigation" .navigation }}
             <script defer src="/assets/scripts.js"></script>
         </body>
     </html>

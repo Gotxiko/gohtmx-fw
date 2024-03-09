@@ -14,7 +14,7 @@ func main() {
 	directories := []string{
 		"src/views/pages",
 		"src/views/components",
-		"src/views/components/shared",
+		"src/views/components/base",
 		"src/views/partials",
 	}
 
