@@ -13,6 +13,37 @@ import * as threejs from './libs/three.js';
 import * as VantaFog from './Vanta/vanta.fog.min.cjs';
 import * as Vanta from './Vanta/init.js';
 
+function loadTextMove() {
+    const text = document.querySelectorAll('.text-move'),
+        root = document.documentElement;
+    text.forEach((t) => {
+        root.addEventListener('mousemove', (e) => {
+            const x = e.clientX,
+                y = e.clientY;
+            t.style.transform = `translate(${-x / 100}px,${-y / 100}px)`;
+        });
+    });
+}
+
+function initPortfolioScripts() {
+    document.querySelectorAll('.project').forEach((project) => {
+        project.addEventListener('mouseover', (e) => {
+            let id = e.target.dataset.index;
+            let project = document.querySelector(`#proj--${id}`);
+            if (project) {
+                project.classList.remove('opacity-0');
+            }
+        });
+        project.addEventListener('mouseout', (e) => {
+            let id = e.target.dataset.index;
+            let project = document.querySelector(`#proj--${id}`);
+            if (project) {
+                project.classList.add('opacity-0');
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('button').forEach((button) => {
         button.addEventListener('click', (e) => {
@@ -31,32 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const text = document.querySelectorAll('.text-move'),
-        root = document.documentElement;
-    text.forEach((t) => {
-        root.addEventListener('mousemove', (e) => {
-            const x = e.clientX,
-                y = e.clientY;
-            t.style.transform = `translate(${-x / 100}px,${-y / 100}px)`;
-        });
-    });
+    loadTextMove();
 
     document.addEventListener('htmx:load', (event) => {
-        document.querySelectorAll('.project').forEach((project) => {
-            project.addEventListener('mouseover', (e) => {
-                let id = e.target.dataset.index;
-                let project = document.querySelector(`#proj--${id}`);
-                if (project) {
-                    project.classList.remove('opacity-0');
-                }
-            });
-            project.addEventListener('mouseout', (e) => {
-                let id = e.target.dataset.index;
-                let project = document.querySelector(`#proj--${id}`);
-                if (project) {
-                    project.classList.add('opacity-0');
-                }
-            });
-        });
+        loadTextMove();
+        initPortfolioScripts();
     });
 });

@@ -19,6 +19,10 @@
             {
                 "name": "Portfolio",
                 "link": "portfolio"
+            },
+            {
+                "name": "Conocimientos",
+                "link": "skills"
             }
         ]
     },
@@ -37,6 +41,25 @@
                 "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg",
                 "bg_img": "/assets/img/imq_bg.jpg"
             }
+        ]
+    },
+    "skills": {
+        "title": "Conocimientos",
+        "languages_title": "Lenguajes",
+        "languages": [
+            { "name": "Javascript" },
+            { "name": "PHP" },
+            { "name": "GO" },
+            { "name": "HTML" },
+            { "name": "CSS" }
+        ],
+        "technologies_title": "Tecnologías",
+        "technologies": [
+            { "name": "Node.js" },
+            { "name": "ExpressJS" },
+            { "name": "TailwindCSS" },
+            { "name": "HTMX" },
+            { "name": "Vue/Nuxt" }
         ]
     }
 }

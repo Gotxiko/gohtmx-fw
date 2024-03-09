@@ -12,10 +12,10 @@ import (
 
 func main() {
 	directories := []string{
-		"public/views/pages",
-		"public/views/components",
-		"public/views/components/shared",
-		"public/views/partials",
+		"src/views/pages",
+		"src/views/components",
+		"src/views/components/shared",
+		"src/views/partials",
 	}
 
 	tmpls := template.New("")
@@ -40,6 +40,7 @@ func main() {
 
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
+	r.PathPrefix("/favicon.ico").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
 	// Handle partials
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler)

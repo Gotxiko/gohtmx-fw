@@ -16,7 +16,7 @@ var slugMap SlugMap
 
 func init() {
 	langs = make(map[string]Langs)
-	files, err := os.ReadDir("locales")
+	files, err := os.ReadDir("src/locales")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -43,7 +43,7 @@ func GetLangs() map[string]Langs {
 }
 
 func loadLangs(lang string) (Langs, error) {
-	jsonFile, err := os.Open(fmt.Sprintf("locales/%s/langs.json", lang))
+	jsonFile, err := os.Open(fmt.Sprintf("src/locales/%s/langs.json", lang))
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func loadLangs(lang string) (Langs, error) {
 }
 
 func loadSlugMap() {
-	jsonFile, err := os.Open("locales/slugToFileMap.json")
+	jsonFile, err := os.Open("src/locales/slugToFileMap.json")
 	if err != nil {
 		panic(err)
 	}

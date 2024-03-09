@@ -1,6 +1,6 @@
 # Gtz Framework - GO + HTMX
 
-This project aims to be a framework for creating simple multilanguage websites using Go. Build custom routes with mux, and make use of HTMX for reactivity and requests. The project is built with GO, HTML(X), SCSS and JS, and uses PM2 to keep the server running.
+This project aims to be a framework for creating simple multilanguage websites using Go. Build custom routes with mux, and make use of HTMX for reactivity and requests. The project is built with GO, HTML, CSS and JS, and uses PM2 to keep the server running.
 
 ## Folder structure
 
@@ -9,16 +9,19 @@ This project aims to be a framework for creating simple multilanguage websites u
 ├── dist
 │
 ├── src
-│   └── assets
-│       ├── css
-│       ├── img
-│       └── js
+│   ├── assets
+│   │   ├── css
+│   │   ├── img
+│   │   └── js
+|   |
+|   ├── locales
+|   |
+│   └── views
+│       ├── components
+│       ├── pages
+│       └── partials
 │
-├── locales
 ├── public
-│   ├── components
-│   ├── pages
-|   └── partials
 |
 └── server
     ├── middleware

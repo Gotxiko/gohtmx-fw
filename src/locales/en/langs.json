@@ -19,6 +19,10 @@
             {
                 "name": "Portfolio",
                 "link": "portfolio"
+            },
+            {
+                "name": "Skills",
+                "link": "skills"
             }
         ]
     },
@@ -41,6 +45,25 @@
                 "company": "Freelance",
                 "img": "https://keinuak.eus/wp-content/uploads/2020/06/LOGO.png"
             }
+        ]
+    },
+    "skills": {
+        "title": "Skills",
+        "languages_title": "Languages",
+        "languages": [
+            { "name": "Javascript" },
+            { "name": "PHP" },
+            { "name": "GO" },
+            { "name": "HTML" },
+            { "name": "CSS" }
+        ],
+        "technologies_title": "Technologies",
+        "technologies": [
+            { "name": "Node.js" },
+            { "name": "ExpressJS" },
+            { "name": "TailwindCSS" },
+            { "name": "HTMX" },
+            { "name": "Vue/Nuxt" }
         ]
     }
 }

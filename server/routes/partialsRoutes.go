@@ -45,7 +45,7 @@ func PartialsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tmpl, err := template.ParseFiles(filepath.Join("public/views/partials", name+".html"))
+	tmpl, err := template.ParseFiles(filepath.Join("src/views/partials", name+".html"))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
