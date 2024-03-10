@@ -1,15 +1,11 @@
 import Analytics from 'analytics';
 import googleTagManager from '@analytics/google-tag-manager';
 
-import CookieConsent from '../CookieConsent/init';
+import CookieConsent from 'vanilla-cookieconsent';
 
 const analytics = Analytics({
     app: 'my-app-name',
-    plugins: [
-        googleTagManager({
-            containerId: 'GTM-XXXXXXX',
-        }),
-    ],
+    plugins: [googleTagManager()],
 });
 
 if (CookieConsent.acceptedCategory('analytics')) {
