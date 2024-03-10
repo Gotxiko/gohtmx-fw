@@ -1,2 +1,23 @@
 @import 'tailwindcss';
 @import 'cookieConsent/cookieconsent.css';
+
+@import 'typography/typography.css';
+
+@import 'utils/viewTransitions.css';
+@import 'utils/svg.css';
+
+@theme {
+    --font-family-akkurat: 'AkkuratMono-Regular';
+}
+
+.text-shadow {
+    text-shadow: 0 0 10px white;
+}
+
+.bg_pattern {
+    background-image: url('/assets/svg/grid_bg.svg');
+    background-repeat: repeat;
+    background-size: 42px 42px;
+    opacity: 0.05;
+    pointer-events: none;
+}

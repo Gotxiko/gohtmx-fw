@@ -7,9 +7,8 @@ dist
 .parcel-cache
 *.code-workspace
 .zed
+.vscode
 .temp
-supervisord.log
-supervisord.pid
 start
 gtz-main
 gtz-app

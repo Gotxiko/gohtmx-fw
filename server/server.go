@@ -1,6 +1,7 @@
 package main
 
 import (
+	"gtz-main/server/middleware"
 	"gtz-main/server/routes"
 	"html/template"
 	"net/http"
@@ -11,10 +12,10 @@ import (
 
 func main() {
 	directories := []string{
-		"public/views/pages",
-		"public/views/components",
-		"public/views/components/shared",
-		"public/views/partials",
+		"src/views/pages",
+		"src/views/components",
+		"src/views/components/base",
+		"src/views/partials",
 	}
 
 	tmpls := template.New("")
@@ -34,8 +35,12 @@ func main() {
 
 	r := mux.NewRouter()
 
+	// Handle gzip compression
+	r.Use(middleware.GzipMiddleware)
+
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
+	r.PathPrefix("/favicon.ico").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
 	// Handle partials
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler)

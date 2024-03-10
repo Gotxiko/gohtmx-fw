@@ -1,0 +1,8 @@
+span.icon {
+    width: 10px;
+    height: 10px;
+}
+
+span.icon.icon--arrow-up-right {
+    content: url(../assets/svg/arrow.up.right.svg);
+}

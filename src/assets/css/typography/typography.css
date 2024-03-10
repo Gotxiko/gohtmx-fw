@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'AkkuratMono-Regular';
+    src: url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.eot');
+    src:
+        url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.eot?#iefix') format('embedded-opentype'),
+        /* url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.woff') format('woff'), */
+            /* url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.woff2') format('woff2'), */
+            /* url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.ttf') format('truetype'), */
+            url('../fonts/Akkurat/2ae387e9fd826eca2b02f780e91333c7.svg#AkkuratMono-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}

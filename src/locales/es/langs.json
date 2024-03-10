@@ -1,0 +1,83 @@
+{
+    "index": {
+        "meta": {
+            "title": "Gotzon Álava",
+            "description": "Desarrollador Fullstack con pasión por crear aplicaciones bonitas y funcionales y siempre en busca de nuevos retos."
+        },
+        "hero": {
+            "name": "Gotzon Álava",
+            "jobtitle": "Desarrollador Fullstack",
+            "about_description": "Desarrollador Fullstack con pasión por crear aplicaciones bonitas y funcionales y siempre en busca de nuevos retos.",
+            "mailme": "Envíame un email",
+            "mailme_link": "mailto:gotzonalava@icloud.com",
+            "github": "Github",
+            "github_link": "https://github.com/Gotxiko"
+        },
+        "navigation": [
+            {
+                "name": "Inicio",
+                "link": "home"
+            },
+            {
+                "name": "Portfolio",
+                "link": "portfolio"
+            },
+            {
+                "name": "Conocimientos",
+                "link": "skills"
+            }
+        ]
+    },
+    "home": {},
+    "portfolio": {
+        "projects": [
+            {
+                "title": "Kutxabank",
+                "company_logo": "Zorraquino",
+                "url": "https://clientes.kutxabank.es",
+                "img": "https://www.brandemia.org/wp-content/uploads/2011/12/logo_principal_kutxabank1.jpg",
+                "auxClass": "h-[75%]"
+            },
+            {
+                "title": "IMQ Prevención",
+                "company_logo": "Zorraquino",
+                "url": "https://imqprevencion.es",
+                "img": "https://www.bam.edu.es/wp-content/uploads/2021/03/IMQ-Prevencion-logo-300x300-1.jpg",
+                "auxClass": "h-[75%]"
+            },
+            {
+                "title": "Keinuak",
+                "company": "Freelance",
+                "url": "https://keinuak.eus",
+                "img": "https://keinuak.eus/wp-content/uploads/2020/06/LOGO.png",
+                "auxClass": "h-[50%]"
+            },
+            {
+                "title": "DeKocina",
+                "company": "Freelance",
+                "url": "https://dekocina.es",
+                "img": "https://dekocina.es/wp-content/uploads/2020/08/logonombre.png",
+                "auxClass": "w-[50%]"
+            }
+        ]
+    },
+    "skills": {
+        "title": "Conocimientos",
+        "languages_title": "Lenguajes",
+        "languages": [
+            { "name": "Javascript" },
+            { "name": "PHP" },
+            { "name": "GO" },
+            { "name": "HTML" },
+            { "name": "CSS" }
+        ],
+        "technologies_title": "Tecnologías",
+        "technologies": [
+            { "name": "Node" },
+            { "name": "ExpressJS" },
+            { "name": "TailwindCSS" },
+            { "name": "HTMX" },
+            { "name": "Vue/Nuxt" }
+        ]
+    }
+}
