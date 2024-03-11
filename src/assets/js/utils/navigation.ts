@@ -1,4 +1,8 @@
-export function initNavigation() {
+export function init() {
+    navigationCheckboxes();
+}
+
+function navigationCheckboxes() {
     document.querySelectorAll('button').forEach((button: HTMLElement) => {
         button.addEventListener('click', (e) => {
             document.querySelectorAll('button').forEach((button: HTMLElement) => {

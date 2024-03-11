@@ -1,4 +1,9 @@
-export function loadTextMove(): void {
+export function init() {
+    loadTextMove();
+    initPortfolioScripts();
+}
+
+function loadTextMove(): void {
     const text: NodeListOf<HTMLElement> = document.querySelectorAll<HTMLElement>('.text-move');
     const root: HTMLElement = document.documentElement;
     text.forEach((t: HTMLElement) => {
@@ -10,7 +15,7 @@ export function loadTextMove(): void {
     });
 }
 
-export function initPortfolioScripts() {
+function initPortfolioScripts() {
     document.querySelectorAll<HTMLElement>('.project').forEach((project: HTMLElement) => {
         project.addEventListener('mouseover', (e: MouseEvent) => {
             let id: string = (e.target as EventTarget & HTMLElement).dataset.index || '';

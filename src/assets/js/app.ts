@@ -11,14 +11,14 @@ import * as Animations from './utils/animations.ts';
 import * as Navigation from './utils/navigation.ts';
 
 document.addEventListener('DOMContentLoaded', () => {
-    Navigation.initNavigation();
+    // Initialize Navigation scripts
+    Navigation.init();
 
-    // Initialize Animations
-    Animations.loadTextMove();
+    // Initialize Animation scripts
+    Animations.init();
 
-    // Re-initialize Animations on htmx:load
-    document.addEventListener('htmx:load', (event) => {
-        Animations.loadTextMove();
-        Animations.initPortfolioScripts();
+    // Re-initialize Animations on htmx:afterSwap after DOM changes
+    document.addEventListener('htmx:afterSwap', (event) => {
+        Animations.init();
     });
 });
