@@ -50,7 +50,7 @@ func main() {
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler(Langs))
 
 	// Handle api routes
-	r.HandleFunc("/api", routes.ApiHandler)
+	r.HandleFunc("/api/{endpoint}", routes.ApiHandler)
 
 	// Handle routes with or without lang and slug
 	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, SlugMap, Langs))
