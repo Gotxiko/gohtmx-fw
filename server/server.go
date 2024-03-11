@@ -1,7 +1,7 @@
 package main
 
 import (
-	locales "gtz-main/server/functions"
+	"gtz-main/server/functions/locales"
 	"gtz-main/server/middleware"
 	"gtz-main/server/routes"
 	"html/template"
@@ -48,6 +48,9 @@ func main() {
 
 	// Handle partials
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler(Langs))
+
+	// Handle api routes
+	r.HandleFunc("/api", routes.ApiHandler)
 
 	// Handle routes with or without lang and slug
 	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, SlugMap, Langs))

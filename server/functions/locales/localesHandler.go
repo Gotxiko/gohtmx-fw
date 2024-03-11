@@ -1,5 +1,7 @@
 package locales
 
+// This package holds the functions to get and store into memory the locales and the slug map for i18n routing
+
 import (
 	"encoding/json"
 	"fmt"

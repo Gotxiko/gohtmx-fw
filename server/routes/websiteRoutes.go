@@ -1,7 +1,7 @@
 package routes
 
 import (
-	locales "gtz-main/server/functions"
+	"gtz-main/server/functions/locales"
 	"html/template"
 	"net/http"
 
