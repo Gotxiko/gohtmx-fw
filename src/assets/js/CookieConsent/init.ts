@@ -33,8 +33,7 @@ CookieConsent.run({
                         },
                         {
                             title: 'Strictly Necessary cookies',
-                            description:
-                                'These cookies are essential for the proper functioning of the website and cannot be disabled.',
+                            description: 'These cookies are essential for the proper functioning of the website and cannot be disabled.',
 
                             //this field will generate a toggle linked to the 'necessary' category
                             linkedCategory: 'necessary',
@@ -47,8 +46,7 @@ CookieConsent.run({
                         },
                         {
                             title: 'More information',
-                            description:
-                                'For any queries in relation to my policy on cookies and your choices, please <a href="#contact-page">contact us</a>',
+                            description: 'For any queries in relation to my policy on cookies and your choices, please <a href="#contact-page">contact us</a>',
                         },
                     ],
                 },

@@ -2,14 +2,8 @@
     <!doctype html>
     <html lang="{{ .lang }}" hx-headers='{"Accept-Language": "{{ .lang }}"}'>
         {{ template "Head" .meta }}
-        <body
-            class="font-akkurat h-dvh w-full overflow-hidden p-4"
-            style="border-color: hsla(0, 0%, 95%, .5); user-select: none;"
-        >
-            <div
-                class="relative z-10 flex h-full flex-row border sm:h-1/2"
-                style="border-color: hsla(0, 0%, 5%, 0.5)"
-            >
+        <body class="font-akkurat h-dvh w-full overflow-hidden p-4" style="border-color: hsla(0, 0%, 95%, .5); user-select: none;">
+            <div class="relative z-10 flex h-full flex-row border sm:h-1/2" style="border-color: hsla(0, 0%, 5%, 0.5)">
                 {{ template "HeroSection" .hero }}
             </div>
             {{ template "Navigation" .navigation }}

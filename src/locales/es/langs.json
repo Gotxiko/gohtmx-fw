@@ -64,20 +64,8 @@
     "skills": {
         "title": "Conocimientos",
         "languages_title": "Lenguajes",
-        "languages": [
-            { "name": "Javascript" },
-            { "name": "PHP" },
-            { "name": "GO" },
-            { "name": "HTML" },
-            { "name": "CSS" }
-        ],
+        "languages": [{ "name": "Javascript" }, { "name": "PHP" }, { "name": "GO" }, { "name": "HTML" }, { "name": "CSS" }],
         "technologies_title": "Tecnologías",
-        "technologies": [
-            { "name": "Node" },
-            { "name": "ExpressJS" },
-            { "name": "TailwindCSS" },
-            { "name": "HTMX" },
-            { "name": "Vue/Nuxt" }
-        ]
+        "technologies": [{ "name": "Node" }, { "name": "ExpressJS" }, { "name": "TailwindCSS" }, { "name": "HTMX" }, { "name": "Vue/Nuxt" }]
     }
 }

@@ -3,49 +3,30 @@
     <div class="z-20 flex h-full w-full flex-row p-8">
         <div class="z-10 flex w-full flex-col justify-between sm:w-1/2">
             <div class="flex flex-col">
-                <h1
-                    class="text-move text-shadow text-4xl font-extralight text-black"
-                >
+                <h1 class="text-move text-shadow text-4xl font-extralight text-black">
                     {{ .name }}
                 </h1>
-                <p
-                    class="text-move text-shadow text-base font-extralight text-black"
-                >
+                <p class="text-move text-shadow text-base font-extralight text-black">
                     {{ .jobtitle }}
                 </p>
             </div>
             <div class="flex flex-col gap-4">
-                <p
-                    class="text-move text-balance pr-14 text-xs font-extralight text-black"
-                >
+                <p class="text-move text-balance pr-14 text-xs font-extralight text-black">
                     {{ .about_description }}
                 </p>
-                <p
-                    class="text-move flex w-fit flex-row gap-2 text-xs font-extralight text-black"
-                >
-                    <a
-                        class="relative flex grow-line flex-row items-center gap-2"
-                        href="{{ .mailme_link }}"
-                        target="_blank"
-                    >
+                <p class="text-move flex w-fit flex-row gap-2 text-xs font-extralight text-black">
+                    <a class="relative flex grow-line flex-row items-center gap-2" href="{{ .mailme_link }}" target="_blank">
                         {{ .mailme }}
                         <span class="icon icon--arrow-up-right block"></span>
                     </a>
                     |
-                    <a
-                        class="relative flex grow-line flex-row items-center gap-2"
-                        href="{{ .github_link }}"
-                        target="_blank"
-                    >
+                    <a class="relative flex grow-line flex-row items-center gap-2" href="{{ .github_link }}" target="_blank">
                         {{ .github }}
                         <span class="icon icon--arrow-up-right block"></span>
                     </a>
                 </p>
             </div>
         </div>
-        <div
-            id="hx-block"
-            class="hx-inner-animate absolute top-0 left-0 z-0 h-full w-full sm:relative sm:w-1/2"
-        ></div>
+        <div id="hx-block" class="hx-inner-animate absolute top-0 left-0 z-0 h-full w-full sm:relative sm:w-1/2"></div>
     </div>
 {{ end }}
