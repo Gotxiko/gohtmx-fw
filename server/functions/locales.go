@@ -1,4 +1,4 @@
-package loadJson
+package locales
 
 import (
 	"encoding/json"
