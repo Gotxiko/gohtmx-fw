@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func GzipMiddleware(next http.Handler) http.Handler {
+func Gzip(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
 			next.ServeHTTP(w, r)

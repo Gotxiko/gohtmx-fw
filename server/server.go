@@ -40,7 +40,10 @@ func main() {
 	r := mux.NewRouter()
 
 	// Handle gzip compression
-	r.Use(middleware.GzipMiddleware)
+	r.Use(middleware.Gzip)
+
+	// Use cache control
+	r.Use(middleware.CacheControl)
 
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
