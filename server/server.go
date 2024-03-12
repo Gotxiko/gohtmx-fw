@@ -53,7 +53,9 @@ func main() {
 	r.Use(middleware.Gzip)
 
 	// Use cache control
-	r.Use(middleware.CacheControl)
+	if ENV == "production" {
+		r.Use(middleware.CacheControl)
+	}
 
 	// Handle assets
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
