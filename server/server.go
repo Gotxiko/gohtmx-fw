@@ -16,11 +16,17 @@ import (
 )
 
 func main() {
+
+	// Load .env file and variables
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	ENV := strings.ToLower(os.Getenv("ENV"))
+	envs := make(map[string]string)
+	for _, env := range os.Environ() {
+		pair := strings.SplitN(env, "=", 2)
+		envs[pair[0]] = pair[1]
+	}
 
 	directories := []string{
 		"src/views/pages",
@@ -30,6 +36,8 @@ func main() {
 	}
 
 	tmpls := template.New("")
+
+	// Pre-parse all templates
 	for _, directory := range directories {
 		files, err := filepath.Glob(filepath.Join(directory, "*.html"))
 		if err != nil {
@@ -44,33 +52,37 @@ func main() {
 		}
 	}
 
+	// Load locales in memory
 	SlugMap := locales.GetSlugMap()
 	Langs := locales.GetLangs()
 
+	// Create router
 	r := mux.NewRouter()
 
-	// Handle gzip compression
-	r.Use(middleware.Gzip)
-
-	// Use cache control
-	if ENV == "production" {
+	// Use middleware
+	gzip, exists := envs["GZIP"]
+	if exists && gzip == "true" {
+		r.Use(middleware.Gzip)
+	}
+	cache, exists := envs["CACHE"]
+	if exists && cache == "true" {
 		r.Use(middleware.CacheControl)
 	}
 
-	// Handle assets
+	// Handle assets routes
 	r.PathPrefix("/assets/").Handler(http.StripPrefix("/assets/", http.FileServer(http.Dir("dist/assets"))))
 	r.PathPrefix("/favicon.ico").Handler(http.StripPrefix("/", http.FileServer(http.Dir("public"))))
 
-	// Handle partials
+	// Handle partials routes
 	r.HandleFunc("/partial/{name}", routes.PartialsHandler(Langs))
 
 	// Handle api routes
 	r.HandleFunc("/api/{endpoint}", routes.ApiHandler)
 
-	// Handle routes with or without lang and slug
-	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
-	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
-	r.HandleFunc("/", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
+	// Handle website routes with or without lang and slug
+	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, envs["ENV"], SlugMap, Langs))
+	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, envs["ENV"], SlugMap, Langs))
+	r.HandleFunc("/", routes.WebsiteHandler(tmpls, envs["ENV"], SlugMap, Langs))
 
 	http.ListenAndServe(":42069", r)
 }
