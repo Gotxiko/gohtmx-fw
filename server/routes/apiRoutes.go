@@ -6,6 +6,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+/*
+// @desc    ApiHandler is the main handler for API routes. These routes return JSON responses
+// @param   http.ResponseWriter, *http.Request
+// @return  func(http.ResponseWriter, *http.Request)
+*/
 func ApiHandler(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	endpoint := vars["endpoint"]

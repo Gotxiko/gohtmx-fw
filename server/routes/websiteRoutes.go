@@ -9,16 +9,21 @@ import (
 	"github.com/gorilla/mux"
 )
 
+/*
+// @desc    WebsiteHandler is the main handler for website routes
+// @param   *template.Template, string, map[string]string, map[string]locales.Langs
+// @return  func(http.ResponseWriter, *http.Request)
+*/
 func WebsiteHandler(tmpls *template.Template, ENV string, SlugMap map[string]string, Langs map[string]locales.Langs) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		lang, langExists := vars["lang"]
 		slug, slugExists := vars["slug"]
 
+		// Handle defaults
 		if !langExists {
 			lang = "en"
 		}
-
 		if !slugExists {
 			if lang == "en" {
 				slug = "home"
@@ -46,6 +51,10 @@ func WebsiteHandler(tmpls *template.Template, ENV string, SlugMap map[string]str
 		langData["lang"] = lang
 		langData["slug"] = slug
 
+		// Check if environment is development, if it is, re-parse all templates
+		// This is done to allow for hot-reloading of templates during development
+		// If it's production, the templates are already parsed and ready to be executed
+		// This is done to improve performance and have faster response times
 		if ENV == "development" {
 			directories := []string{
 				"src/views/pages",

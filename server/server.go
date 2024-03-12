@@ -1,5 +1,10 @@
 package main
 
+/*
+// @title   Main package
+// @desc    This is the main package for the server. It handles the routes, middleware and templates
+*/
+
 import (
 	"gtz-main/server/functions/locales"
 	"gtz-main/server/middleware"
@@ -84,5 +89,6 @@ func main() {
 	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, envs["ENV"], SlugMap, Langs))
 	r.HandleFunc("/", routes.WebsiteHandler(tmpls, envs["ENV"], SlugMap, Langs))
 
+	// Start server
 	http.ListenAndServe(":42069", r)
 }

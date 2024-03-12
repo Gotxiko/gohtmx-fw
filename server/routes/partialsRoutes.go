@@ -9,6 +9,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+/*
+// @desc    PartialsHandler is the main handler for partials routes. The requests are made with HTMX
+// @param   map[string]locales.Langs
+// @return  func(http.ResponseWriter, *http.Request)
+*/
 func PartialsHandler(Langs map[string]locales.Langs) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
