@@ -5,13 +5,23 @@ import (
 	"gtz-main/server/middleware"
 	"gtz-main/server/routes"
 	"html/template"
+	"log"
 	"net/http"
+	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+	ENV := strings.ToLower(os.Getenv("ENV"))
+
 	directories := []string{
 		"src/views/pages",
 		"src/views/components",
@@ -56,9 +66,9 @@ func main() {
 	r.HandleFunc("/api/{endpoint}", routes.ApiHandler)
 
 	// Handle routes with or without lang and slug
-	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, SlugMap, Langs))
-	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, SlugMap, Langs))
-	r.HandleFunc("/", routes.WebsiteHandler(tmpls, SlugMap, Langs))
+	r.HandleFunc("/{lang:[a-z]{2}}/{slug}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
+	r.HandleFunc("/{lang:[a-z]{2}}{trailingslash:\\/?}", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
+	r.HandleFunc("/", routes.WebsiteHandler(tmpls, ENV, SlugMap, Langs))
 
 	http.ListenAndServe(":42069", r)
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func WebsiteHandler(tmpls *template.Template, SlugMap map[string]string, Langs map[string]locales.Langs) func(w http.ResponseWriter, r *http.Request) {
+func WebsiteHandler(tmpls *template.Template, ENV string, SlugMap map[string]string, Langs map[string]locales.Langs) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
 		vars := mux.Vars(r)
 		lang, langExists := vars["lang"]
@@ -28,7 +28,6 @@ func WebsiteHandler(tmpls *template.Template, SlugMap map[string]string, Langs m
 		}
 
 		// Get the name of the template to be rendered
-		// slugMap := loadJson.GetSlugMap()
 		page := SlugMap[slug]
 
 		// Lookup the requested page
@@ -47,8 +46,7 @@ func WebsiteHandler(tmpls *template.Template, SlugMap map[string]string, Langs m
 		langData["lang"] = lang
 		langData["slug"] = slug
 
-		var isProd = false
-		if !isProd {
+		if ENV == "development" {
 			directories := []string{
 				"src/views/pages",
 				"src/views/components",
