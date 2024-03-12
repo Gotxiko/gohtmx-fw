@@ -4,6 +4,7 @@ import (
 	"gtz-main/server/functions/locales"
 	"html/template"
 	"net/http"
+	"path/filepath"
 
 	"github.com/gorilla/mux"
 )
@@ -46,11 +47,47 @@ func WebsiteHandler(tmpls *template.Template, SlugMap map[string]string, Langs m
 		langData["lang"] = lang
 		langData["slug"] = slug
 
-		// Execute the template
-		err := tmpl.ExecuteTemplate(w, page, langData)
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
+		var isProd = false
+		if !isProd {
+			directories := []string{
+				"src/views/pages",
+				"src/views/components",
+				"src/views/components/base",
+				"src/views/partials",
+			}
+
+			tmpls := template.New("")
+			for _, directory := range directories {
+				files, err := filepath.Glob(filepath.Join(directory, "*.html"))
+				if err != nil {
+					panic(err)
+				}
+
+				for _, file := range files {
+					_, err = tmpls.ParseFiles(file)
+					if err != nil {
+						panic(err)
+					}
+				}
+			}
+			tmpl := tmpls.Lookup(page + ".html")
+			if tmpl == nil {
+				http.Error(w, "Page not found", http.StatusNotFound)
+				return
+			}
+			// Execute the template
+			err := tmpl.ExecuteTemplate(w, page, langData)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
+		} else {
+			// Execute the template
+			err := tmpl.ExecuteTemplate(w, page, langData)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 		}
 	}
 }
