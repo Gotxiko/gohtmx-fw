@@ -8,7 +8,7 @@
         "build:assets": "cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
         "build:css": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css",
         "build:js": "esbuild src/assets/js/app.ts --outfile=dist/assets/scripts.js --bundle --minify",
-        "build": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css && esbuild src/assets/js/app.ts --outfile=dist/assets/scripts.js --bundle --minify && cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/",
+        "build": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css && esbuild src/assets/js/app.ts --outfile=dist/assets/scripts.js --bundle --minify && cp -R src/assets/img dist/assets/ && cp -R src/assets/svg dist/assets/ && cp -R src/assets/fonts dist/assets/",
         "start:air": "~/go/bin/air",
         "watch:css": "bun x tailwindcss -m -i src/assets/css/app.css -o dist/assets/styles.css --watch",
         "watch:js": "esbuild src/assets/js/app.ts --outfile=dist/assets/scripts.js --bundle --minify --watch",
