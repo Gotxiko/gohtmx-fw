@@ -1,4 +1,4 @@
-# GO + HTMX Simple Framework
+# GO + HTMX Simple Learning playground Framework
 
 This project is a learning playground that aims to create a very very simple Go+HTMX framework. Build custom routes with mux, and make use of HTMX for reactivity and requests. The project is built with GO, HTML, CSS and JS, and uses PM2 to keep the server running.
 
